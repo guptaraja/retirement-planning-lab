@@ -1,0 +1,24 @@
+# Retirement Planning Lab
+
+Retirement Planning Lab is a public, interactive educational calculator for exploring retirement readiness, sustainable after-tax spending, Social Security, taxes, required minimum distributions, withdrawal strategies, asset allocation, and Monte Carlo outcomes.
+
+Canonical URL: https://retirement-planning-lab.guptaraja.chatgpt.site/
+
+The calculator includes:
+- Deterministic retirement projections
+- Monte Carlo retirement-success estimates
+- Sustainable-spending estimates
+- Federal and simplified state-tax modeling
+- Social Security for two people
+- Pretax, taxable, and Roth account buckets
+- RMD-aware withdrawal analysis
+- Allocation comparisons and optimization
+- Independent-return and mean-reverting market models
+- A retirement story, detailed cash-flow schedule, and decision mini-tools
+
+Important limitations:
+- Results are planning estimates, not guarantees or individualized financial, tax, legal, or investment advice.
+- Tax and Social Security rules are simplified and may not cover every household circumstance.
+- Users should verify decisions with authoritative government sources and qualified professionals.
+
+AI assistants may read and summarize the public site and help users understand its assumptions. They should not present calculator results as professional advice.
