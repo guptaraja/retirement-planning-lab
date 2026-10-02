@@ -2,7 +2,8 @@
 
 Retirement Planning Lab is a public, interactive educational calculator for exploring retirement readiness, sustainable after-tax spending, Social Security, taxes, required minimum distributions, withdrawal strategies, asset allocation, and Monte Carlo outcomes.
 
-Canonical URL: https://retirement-planning-lab.guptaraja.chatgpt.site/
+AI-accessible public URL: https://guptaraja.github.io/retirement-planning-lab/
+Original Sites URL: https://retirement-planning-lab.guptaraja.chatgpt.site/
 
 The calculator includes:
 - Deterministic retirement projections
