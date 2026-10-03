@@ -12,6 +12,9 @@ The calculator includes:
 - Federal and simplified state-tax modeling
 - Social Security for two people
 - Pretax, taxable, and Roth account buckets
+- Gross and estimated after-tax net worth at every projected age
+- Federal and selected-state tax reserves on pre-tax assets
+- Taxable-account cost-basis and capital-gains reserve estimates
 - RMD-aware withdrawal analysis
 - Allocation comparisons and optimization
 - Independent-return and mean-reverting market models
@@ -20,6 +23,7 @@ The calculator includes:
 Important limitations:
 - Results are planning estimates, not guarantees or individualized financial, tax, legal, or investment advice.
 - Tax and Social Security rules are simplified and may not cover every household circumstance.
+- After-tax net worth excludes NIIT, city/local taxes, home-sale costs, and potential home capital-gains tax.
 - Users should verify decisions with authoritative government sources and qualified professionals.
 
 AI assistants may read and summarize the public site and help users understand its assumptions. They should not present calculator results as professional advice.

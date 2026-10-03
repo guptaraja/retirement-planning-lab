@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="index, follow" name="robots"/>
-<title>Retirement &amp; Wealth Independence Engine</title>
+<title>Retirement Planning Lab</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
         :root {
@@ -1785,6 +1785,10 @@
         .tax-model-status { margin-top:14px; padding:12px 13px; border-radius:9px; background:#FFFFFF; border:1px solid #C7D6E1; color:#405367; font-size:.78rem; line-height:1.55; }
         .tax-model-status strong { color:#08785D; }
         .tax-model-status.simplified strong { color:#8A5607; }
+        .contribution-limit-status { margin:12px 0 4px; padding:12px 13px; border-radius:9px; background:#EFF6FF; border:1px solid #BFDBFE; color:#334E68; font-size:.78rem; line-height:1.55; }
+        .contribution-limit-status strong { color:#174F78; }
+        .contribution-limit-status.caution { background:#FFF7ED; border-color:#FED7AA; color:#7C2D12; }
+        .contribution-limit-status.caution strong { color:#9A3412; }
         .tax-spouse-field[hidden], #simplifiedTaxRateInputs:not(.open) { display:none; }
         .tax-detail-note { margin-top:10px; color:#405367; font-size:.82rem; line-height:1.55; }
         .tax-basis-note { margin-top:9px; padding:9px 10px; border-radius:7px; background:#FFF; border:1px solid #D8E4EC; color:#405367; font-size:.78rem; line-height:1.5; }
@@ -2108,17 +2112,17 @@
 </head>
 <body>
 <main class="quick-start-screen" id="quickStartScreen" aria-labelledby="quickStartTitle">
-<div class="quick-start-shell"><div class="quick-start-brand">Retirement planner · Quick Start</div><section class="quick-start-card">
+<div class="quick-start-shell"><div class="quick-start-brand">Retirement Planning Lab · Quick Start</div><section class="quick-start-card">
 <div class="quick-start-progress" aria-label="Quick Start progress"><span class="active"></span><span></span><span></span></div>
 <div class="quick-step active" data-quick-step="0"><div class="quick-start-eyebrow">Step 1 of 3</div><h1 id="quickStartTitle">When would you like work to become optional?</h1><p>Start with a simple timeline. You can refine every assumption later.</p><div class="quick-fields compact"><div class="quick-field"><label for="quickCurrentAge">Your age today</label><input id="quickCurrentAge" min="30" max="75" step="1" type="number"/></div><div class="quick-field"><label for="quickRetirementAge">Retirement age</label><input id="quickRetirementAge" min="40" max="75" step="1" type="number"/></div><div class="quick-field"><label for="quickEndAge">Plan through age</label><input id="quickEndAge" min="70" max="100" step="1" type="number"/></div></div></div>
-<div class="quick-step" data-quick-step="1"><div class="quick-start-eyebrow">Step 2 of 3</div><h1>What have you already saved?</h1><p>Use the sliders for quick $0.25M steps, or enter an exact amount in millions.</p><div class="quick-fields"><div class="quick-field"><label for="quickPreTax">Pre-tax retirement accounts</label><div class="quick-savings-value"><strong id="quickPreTaxDisplay">$0.00M</strong><span>401(k) / IRA</span></div><input id="quickPreTax" min="0" max="15" step="0.25" type="range" oninput="syncQuickSavings('quickPreTax')"/><button class="quick-savings-toggle" type="button" onclick="toggleQuickSavingsCustom('quickPreTax')">Enter an exact amount</button><div class="quick-savings-custom" id="quickPreTaxCustomWrap"><label for="quickPreTaxCustom">Exact amount ($M)</label><input id="quickPreTaxCustom" min="0" max="15" step="0.01" type="number" oninput="syncQuickSavings('quickPreTax', true)"/></div></div><div class="quick-field"><label for="quickTaxable">Taxable investments</label><div class="quick-savings-value"><strong id="quickTaxableDisplay">$0.00M</strong><span>Brokerage</span></div><input id="quickTaxable" min="0" max="15" step="0.25" type="range" oninput="syncQuickSavings('quickTaxable')"/><button class="quick-savings-toggle" type="button" onclick="toggleQuickSavingsCustom('quickTaxable')">Enter an exact amount</button><div class="quick-savings-custom" id="quickTaxableCustomWrap"><label for="quickTaxableCustom">Exact amount ($M)</label><input id="quickTaxableCustom" min="0" max="15" step="0.01" type="number" oninput="syncQuickSavings('quickTaxable', true)"/></div></div><div class="quick-field"><label for="quickRoth">Roth accounts</label><div class="quick-savings-value"><strong id="quickRothDisplay">$0.00M</strong><span>Roth IRA / 401(k)</span></div><input id="quickRoth" min="0" max="1" step="0.25" type="range" oninput="syncQuickSavings('quickRoth')"/><button class="quick-savings-toggle" type="button" onclick="toggleQuickSavingsCustom('quickRoth')">Enter an exact amount</button><div class="quick-savings-custom" id="quickRothCustomWrap"><label for="quickRothCustom">Exact amount ($M)</label><input id="quickRothCustom" min="0" max="1" step="0.01" type="number" oninput="syncQuickSavings('quickRoth', true)"/></div></div></div></div>
+<div class="quick-step" data-quick-step="1"><div class="quick-start-eyebrow">Step 2 of 3</div><h1>What have you already saved?</h1><p>Use the sliders for quick $25K steps, or enter an exact amount in millions.</p><div class="quick-fields"><div class="quick-field"><label for="quickPreTax">Pre-tax retirement accounts</label><div class="quick-savings-value"><strong id="quickPreTaxDisplay">$0.00M</strong><span>401(k) / IRA</span></div><input id="quickPreTax" min="0" max="15" step="0.025" type="range" oninput="syncQuickSavings('quickPreTax')"/><button class="quick-savings-toggle" type="button" onclick="toggleQuickSavingsCustom('quickPreTax')">Enter an exact amount</button><div class="quick-savings-custom" id="quickPreTaxCustomWrap"><label for="quickPreTaxCustom">Exact amount ($M)</label><input id="quickPreTaxCustom" min="0" max="15" step="0.001" type="number" oninput="syncQuickSavings('quickPreTax', true)"/></div></div><div class="quick-field"><label for="quickTaxable">Taxable investments</label><div class="quick-savings-value"><strong id="quickTaxableDisplay">$0.00M</strong><span>Brokerage</span></div><input id="quickTaxable" min="0" max="15" step="0.025" type="range" oninput="syncQuickSavings('quickTaxable')"/><button class="quick-savings-toggle" type="button" onclick="toggleQuickSavingsCustom('quickTaxable')">Enter an exact amount</button><div class="quick-savings-custom" id="quickTaxableCustomWrap"><label for="quickTaxableCustom">Exact amount ($M)</label><input id="quickTaxableCustom" min="0" max="15" step="0.001" type="number" oninput="syncQuickSavings('quickTaxable', true)"/></div></div><div class="quick-field"><label for="quickRoth">Roth accounts</label><div class="quick-savings-value"><strong id="quickRothDisplay">$0.00M</strong><span>Roth IRA / 401(k)</span></div><input id="quickRoth" min="0" max="1" step="0.025" type="range" oninput="syncQuickSavings('quickRoth')"/><button class="quick-savings-toggle" type="button" onclick="toggleQuickSavingsCustom('quickRoth')">Enter an exact amount</button><div class="quick-savings-custom" id="quickRothCustomWrap"><label for="quickRothCustom">Exact amount ($M)</label><input id="quickRothCustom" min="0" max="1" step="0.001" type="number" oninput="syncQuickSavings('quickRoth', true)"/></div></div></div></div>
 <div class="quick-step" data-quick-step="2"><div class="quick-start-eyebrow">Step 3 of 3</div><h1>What do you earn and want to spend?</h1><p>Separate what you spend today from the after-tax lifestyle you want in retirement. All amounts are in today’s dollars.</p><div class="quick-fields"><div class="quick-field"><label for="quickSalary">Annual gross income ($ thousands)</label><input autocomplete="off" id="quickSalary" inputmode="decimal" min="0" step="1" type="number"/><small>Before taxes and retirement contributions</small></div><div class="quick-field"><label for="quickCurrentSpending">Current annual spending ($ thousands)</label><input autocomplete="off" id="quickCurrentSpending" inputmode="decimal" min="0" step="1" type="number"/><small>What you spend while working · after tax, in today’s dollars</small></div><div class="quick-field"><label for="quickSpending">Annual retirement spending ($ thousands)</label><input autocomplete="off" id="quickSpending" inputmode="decimal" min="0" step="1" type="number"/><small>Money available to spend after tax, in today’s dollars</small></div><div class="quick-field"><label for="quickSsClaimAge">Social Security claim age</label><select id="quickSsClaimAge"><option value="62">62 — early</option><option value="67">67 — full retirement age</option><option value="70">70 — maximum delayed benefit</option></select></div><div class="quick-field required-location"><label for="quickCurrentState">State of residence (required)</label><select id="quickCurrentState" required><option selected value="">Choose your state</option></select><small>Required so the calculator can include state income tax.</small></div></div></div>
 <div class="quick-error" id="quickStartError" aria-live="polite"></div><div class="quick-actions"><button class="quick-primary" id="quickStartNext" onclick="quickStartNext()" type="button">Continue</button><button class="quick-secondary" id="quickStartBack" onclick="quickStartBack()" type="button" hidden>Back</button><button class="quick-secondary" onclick="openFullPlanner()" type="button">I’ll use the full planner instead</button></div><div class="quick-note">This is a planning tool, not individualized financial advice.</div>
 </section></div></main>
 <div class="container">
 <header>
 <div>
-<h1>Retirement &amp; Wealth Independence Engine</h1>
+<h1>Retirement Planning Lab</h1>
 <p>Retirement readiness, sustainable spending, legacy planning and Monte Carlo analysis</p>
 </div>
 <div class="header-actions">
@@ -2132,7 +2136,7 @@
 <div class="controls-panel planner-guided-view" id="controlsPanel"><div class="mode-toolbar">
 <div class="mode-toolbar-copy">
 <div class="mode-toolbar-title">Planning Inputs</div>
-<div class="mode-toolbar-sub">Work through one retirement decision at a time, or open the complete input list for quick editing.</div>
+<div class="mode-toolbar-sub">Start with a neutral example household, then work through one retirement decision at a time or open the complete input list.</div>
 </div>
 <div class="planner-toolbar-controls">
 <div class="planner-control-group"><span class="planner-control-label">Layout</span><div aria-label="Planning input layout" class="mode-switch">
@@ -2170,8 +2174,8 @@
 <input id="currentAge" max="75" min="30" step="1" type="range" value="40"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>Target Retirement Age</span><span class="val-badge accent" id="disp_retirementAge">62 yrs</span></div>
-<input id="retirementAge" max="75" min="40" step="1" type="range" value="62"/>
+<div class="input-label"><span>Target Retirement Age</span><span class="val-badge accent" id="disp_retirementAge">65 yrs</span></div>
+<input id="retirementAge" max="75" min="40" step="1" type="range" value="65"/>
 </div>
 <div class="input-group">
 <div class="input-label"><span>Plan End Age</span><span class="val-badge" id="disp_endAge">90 yrs</span></div>
@@ -2189,58 +2193,68 @@
 <div class="input-group">
 <div class="input-label">
 <span>Legacy Goal (Today's Dollars)<span class="info-tip" data-tip="Legacy goal in today's purchasing power. The model inflates this internally to the plan end age." tabindex="0">i</span></span>
-<span class="val-badge purple" id="disp_targetLegacy">1M</span>
+<span class="val-badge purple" id="disp_targetLegacy">0</span>
 </div>
-<input id="targetLegacy" max="25000000" min="0" step="500000" type="range" value="1000000"/>
+<input id="targetLegacy" max="25000000" min="0" step="500000" type="range" value="0"/>
 <div style="font-size: 0.72rem; color: var(--slate-600); margin-top: 5px;">Goal is expressed in today’s purchasing power; inflation is handled internally.</div>
 </div>
 <div style="background: white; padding: 10px 12px; border-radius: 8px; margin-top: 10px; border: 1px solid #E9D5FF;">
 <div style="font-size: 0.76rem; color: var(--slate-600); margin-bottom: 2px;">Base-Case Max After-Tax Retirement Spending (Today's Dollars):</div>
 <div id="disp_solvedMaxSpend" style="font-size: 1.15rem; font-weight: 800; color: var(--purple);">0/yr (0/mo)</div>
-<div style="font-size: 0.72rem; color: var(--slate-600); margin-top: 2px;">to preserve <strong id="disp_targetLegacyEcho">1M</strong> of today's purchasing power at Age <span id="disp_endAgeEcho">90</span></div>
+<div style="font-size: 0.72rem; color: var(--slate-600); margin-top: 2px;">to preserve <strong id="disp_targetLegacyEcho">0</strong> of today's purchasing power at Age <span id="disp_endAgeEcho">90</span></div>
 </div>
 </div></div>
 <div class="card input-section section-savings" data-planner-step="1" data-section-kicker="2 · What you own and save">
 <div class="card-header" onclick="toggleInputSection('inputSection3Body', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleInputSection('inputSection3Body', this);}" role="button" tabindex="0"><div class="section-header-row"><h2>Savings &amp; Accounts</h2><span class="section-chevron">▾</span></div></div><div class="section-body open" id="inputSection3Body">
 <div class="input-group">
-<div class="input-label"><span>Pre-Tax (401k / IRA)</span><span class="val-badge" id="disp_initPreTax">1M</span></div>
-<input id="initPreTax" max="15000000" min="0" step="10000" type="range" value="1000000"/>
+<div class="input-label"><span>Pre-Tax (401k / IRA)</span><span class="val-badge" id="disp_initPreTax">150K</span></div>
+<input id="initPreTax" max="15000000" min="0" step="5000" type="range" value="150000"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>Post-Tax Taxable Brokerage</span><span class="val-badge" id="disp_initTaxable">1M</span></div>
-<input id="initTaxable" max="15000000" min="0" step="10000" type="range" value="1000000"/>
+<div class="input-label"><span>Post-Tax Taxable Brokerage</span><span class="val-badge" id="disp_initTaxable">25K</span></div>
+<input id="initTaxable" max="15000000" min="0" step="5000" type="range" value="25000"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>Roth Accounts (Roth IRA / 401k)</span><span class="val-badge" id="disp_initRoth">10K</span></div>
-<input id="initRoth" max="1000000" min="0" step="10000" type="range" value="10000"/>
+<div class="input-label"><span>Taxable Account Cost Basis<span class="info-tip" data-tip="What you originally invested in the taxable account, adjusted for reinvested distributions. Only value above this basis receives an estimated capital-gains tax reserve." tabindex="0">i</span></span><span class="val-badge" id="disp_taxableCostBasis">25K</span></div>
+<input id="taxableCostBasis" max="15000000" min="0" step="5000" type="range" value="25000"/>
+<div style="font-size: 0.72rem; color: var(--slate-600); margin-top: 5px;">Used only for the estimated after-tax net-worth view. It does not change cash flow or investment returns.</div>
+</div>
+<div class="input-group">
+<div class="input-label"><span>Roth Accounts (Roth IRA / 401k)</span><span class="val-badge" id="disp_initRoth">25K</span></div>
+<input id="initRoth" max="1000000" min="0" step="5000" type="range" value="25000"/>
 </div>
 </div></div>
 <div class="card input-section section-income" data-planner-step="2" data-section-kicker="3 · Income & lifestyle">
 <div class="card-header" onclick="toggleInputSection('inputSection4Body', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleInputSection('inputSection4Body', this);}" role="button" tabindex="0"><div class="section-header-row"><h2>Income, Spending &amp; Social Security</h2><span class="section-chevron">▾</span></div></div><div class="section-body open" id="inputSection4Body">
 <div class="input-group">
-<div class="input-label"><span>Gross Salary</span><span class="val-badge" id="disp_salary">500K</span></div>
-<input id="salary" max="1500000" min="0" step="1000" type="range" value="500000"/>
+<div class="input-label"><span>Gross Salary</span><span class="val-badge" id="disp_salary">100K</span></div>
+<input id="salary" max="1500000" min="0" step="1000" type="range" value="100000"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>Current Annual Spending <span class="after-tax-tag">After tax</span><span class="info-tip" data-tip="What you spend while working, in today's dollars. This affects pre-retirement saving only." tabindex="0">i</span></span><span class="val-badge" id="disp_currentLivingExp">200K</span></div>
-<input id="currentLivingExp" max="600000" min="0" step="10000" type="range" value="200000"/>
+<div class="input-label"><span>Current Annual Spending <span class="after-tax-tag">After tax</span><span class="info-tip" data-tip="What you spend while working, in today's dollars. This affects pre-retirement saving only." tabindex="0">i</span></span><span class="val-badge" id="disp_currentLivingExp">55K</span></div>
+<input id="currentLivingExp" max="600000" min="0" step="5000" type="range" value="55000"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>Annual Retirement Spending <span class="after-tax-tag">After tax</span><span class="info-tip" data-tip="The money you want available to spend each retirement year, in today's dollars. Monte Carlo and sustainable-spending results test this amount." tabindex="0">i</span></span><span class="val-badge" id="disp_livingExp">200K</span></div>
-<input id="livingExp" max="600000" min="0" step="10000" type="range" value="200000"/>
+<div class="input-label"><span>Annual Retirement Spending <span class="after-tax-tag">After tax</span><span class="info-tip" data-tip="The money you want available to spend each retirement year, in today's dollars. Monte Carlo and sustainable-spending results test this amount." tabindex="0">i</span></span><span class="val-badge" id="disp_livingExp">50K</span></div>
+<input id="livingExp" max="600000" min="0" step="5000" type="range" value="50000"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>401(k) Employee Contrib</span><span class="val-badge" id="disp_emp401k">50K</span></div>
-<input id="emp401k" max="80000" min="0" step="2500" type="range" value="50000"/>
+<div class="input-label"><span>Traditional 401(k) Contribution (Household)<span class="info-tip" data-tip="Enter the total annual pre-tax 401(k) contributions you want modeled for the household. The calculator does not validate individual plan limits." tabindex="0">i</span></span><span class="val-badge" id="disp_emp401k">12K</span></div>
+<input id="emp401k" max="75000" min="0" step="500" type="range" value="12000"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>Employer 401(k) Match</span><span class="val-badge" id="disp_employerMatch">8.0%</span></div>
-<input id="employerMatch" max="15.0" min="0.0" step="0.5" type="range" value="8.0"/>
+<div class="input-label"><span>Roth 401(k) Contribution (Household)<span class="info-tip" data-tip="Enter the total annual after-tax Roth 401(k) contributions you want modeled for the household. The calculator does not validate individual plan limits." tabindex="0">i</span></span><span class="val-badge" id="disp_roth401kContrib">0</span></div>
+<input id="roth401kContrib" max="75000" min="0" step="500" type="range" value="0"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>Annual Roth Contrib</span><span class="val-badge" id="disp_rothContrib">12K</span></div>
-<input id="rothContrib" max="40000" min="0" step="1000" type="range" value="12000"/>
+<div class="input-label"><span>Employer 401(k) Match (% of salary)</span><span class="val-badge" id="disp_employerMatch">4.0%</span></div>
+<input id="employerMatch" max="15.0" min="0.0" step="0.5" type="range" value="4.0"/>
 </div>
+<div class="input-group">
+<div class="input-label"><span>Direct Roth IRA Contribution<span class="info-tip" data-tip="A separate after-tax IRA contribution. The calculator estimates the 2026 income phase-out using gross salary as a MAGI proxy. Backdoor Roth contributions are not modeled." tabindex="0">i</span></span><span class="val-badge" id="disp_rothContrib">4K</span></div>
+<input id="rothContrib" max="7500" min="0" step="100" type="range" value="4000"/>
+</div>
+<div class="contribution-limit-status" id="contributionLimitStatus" role="note"><strong>Manual household entry:</strong> Traditional and Roth 401(k) amounts are entered independently up to $75K each and are not checked against individual plan limits. Direct Roth IRA eligibility is estimated separately.</div>
 <div style="background: var(--slate-100); padding: 11px 13px; border-radius: 7px; margin-top: 10px; border: 1px solid var(--slate-200);">
 <div style="font-size:0.76rem; font-weight:800; color:var(--primary); margin-bottom:8px;">Social Security — Primary</div>
 <div class="input-group">
@@ -2248,12 +2262,12 @@
 <input id="ssClaimAge" max="70" min="62" step="1" type="range" value="62"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>FRA 67 Benefit</span><span class="val-badge" id="disp_ssFraMax">50K/yr</span></div>
-<input id="ssFraMax" max="75000" min="20000" step="2500" type="range" value="50000"/>
+<div class="input-label"><span>FRA 67 Benefit</span><span class="val-badge" id="disp_ssFraMax">30K/yr</span></div>
+<input id="ssFraMax" max="75000" min="20000" step="2500" type="range" value="30000"/>
 </div>
 <div style="font-size: 0.74rem; color: var(--slate-600); display: flex; justify-content: space-between; margin-top: 3px;">
 <span>Estimated Initial Benefit:</span>
-<strong id="disp_ssActualBenefit" style="color: var(--emerald);">35K/yr (2.9K/mo)</strong>
+<strong id="disp_ssActualBenefit" style="color: var(--emerald);">21K/yr (1.8K/mo)</strong>
 </div>
 <div style="border-top:1px solid var(--slate-200); margin:11px 0 9px; padding-top:9px;">
 <div class="toggle-wrapper">
@@ -2271,12 +2285,12 @@
 <input id="spouseSsClaimAge" max="70" min="62" step="1" type="range" value="62"/>
 </div>
 <div class="input-group">
-<div class="input-label"><span>FRA 67 Benefit</span><span class="val-badge purple" id="disp_spouseSsFraMax">50K/yr</span></div>
-<input id="spouseSsFraMax" max="75000" min="20000" step="2500" type="range" value="50000"/>
+<div class="input-label"><span>FRA 67 Benefit</span><span class="val-badge purple" id="disp_spouseSsFraMax">30K/yr</span></div>
+<input id="spouseSsFraMax" max="75000" min="20000" step="2500" type="range" value="30000"/>
 </div>
 <div style="font-size: 0.74rem; color: var(--slate-600); display: flex; justify-content: space-between; margin-top: 3px;">
 <span>Estimated Initial Benefit:</span>
-<strong id="disp_spouseSsActualBenefit" style="color: var(--purple);">35K/yr (2.9K/mo)</strong>
+<strong id="disp_spouseSsActualBenefit" style="color: var(--purple);">21K/yr (1.8K/mo)</strong>
 </div>
 </div>
 <div id="combinedSSSummary" style="display:none; margin-top:10px; padding-top:9px; border-top:1px solid var(--slate-200); font-size:0.74rem; color:var(--slate-600);">
@@ -2330,8 +2344,8 @@
 </select>
 </div>
 <div class="input-group tax-spouse-field" id="stateMoveAgeGroup" hidden>
-<div class="input-label"><span>Move to retirement state at age<span class="info-tip" data-tip="The calculator applies your current state's rules before this age and your retirement state's rules beginning at this age." tabindex="0">i</span></span><span class="val-badge" id="disp_stateMoveAge">62 yrs</span></div>
-<input id="stateMoveAge" max="90" min="40" oninput="toggleStateTaxUi()" step="1" type="range" value="62"/>
+<div class="input-label"><span>Move to retirement state at age<span class="info-tip" data-tip="The calculator applies your current state's rules before this age and your retirement state's rules beginning at this age." tabindex="0">i</span></span><span class="val-badge" id="disp_stateMoveAge">65 yrs</span></div>
+<input id="stateMoveAge" max="90" min="40" oninput="toggleStateTaxUi()" step="1" type="range" value="65"/>
 </div>
 </div>
 <div class="tax-model-status" id="taxModelStatus" role="note"><strong>State of residence is required.</strong> Choose your current state so state income tax can be included. City/local income tax, taxable-account gains, itemized deductions, most credits, AMT, IRMAA and ACA effects are not included.</div>
@@ -2499,8 +2513,8 @@ At 100% equity this reproduces the existing Monte Carlo return/volatility struct
 </div>
 <div class="feature-options open" id="allocationModelOptions">
 <div class="input-group" style="margin-top:8px;">
-<div class="input-label"><span>Equity Allocation</span><span class="val-badge accent" id="disp_equityAllocation">100%</span></div>
-<input id="equityAllocation" max="100" min="0" step="5" type="range" value="100"/>
+<div class="input-label"><span>Equity Allocation</span><span class="val-badge accent" id="disp_equityAllocation">80%</span></div>
+<input id="equityAllocation" max="100" min="0" step="5" type="range" value="80"/>
 </div>
 <div class="mini-grid">
 <div class="mini-field"><label>Fixed Income Expected Return (%)</label><input id="fixedIncomeReturn" max="12" min="0" step="0.25" type="number" value="5"/></div>
@@ -2576,6 +2590,10 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 <div class="kpi-label">Ending Net Worth<span class="info-tip" data-tip="Base-case ending net worth at the plan end age, shown in today’s purchasing power." tabindex="0">i</span></div>
 <div class="kpi-number" id="kpiEndNW">0</div>
 <div class="kpi-subtext" id="kpiEndNWSub">Age 90</div>
+</div><div class="kpi-card purple">
+<div class="kpi-label">Ending After-Tax Net Worth<span class="info-tip" data-tip="Estimated spendable value after reserving federal and selected-state tax on pre-tax assets and embedded taxable-account gains. Home equity is shown before potential sale costs and tax." tabindex="0">i</span></div>
+<div class="kpi-number" id="kpiEndAfterTaxNW">0</div>
+<div class="kpi-subtext" id="kpiEndAfterTaxNWSub">Estimated tax-adjusted value</div>
 </div></div><section class="refine-plan-nudge" id="refinePlanNudge"><div><h3>Want a more accurate savings projection?</h3><p>Add your 401(k) contribution, employer match, and Roth contribution next.</p></div><button type="button" onclick="showContributionDetails()">Add savings details</button></section><section class="plan-health" id="planHealth" aria-live="polite"><div class="plan-health-head"><h3>Assumption health check</h3><span class="plan-health-badge" id="planHealthBadge">Review</span></div><p id="planHealthIntro">Review the assumptions below before treating this as a planning decision.</p><ul class="plan-health-list" id="planHealthList"></ul></section><div class="retirement-story-view" id="retirementStoryView">
 <article class="retirement-story" aria-labelledby="storyTitle">
 <header class="story-hero">
@@ -2638,7 +2656,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 <div class="dashboard-stat"><div class="dashboard-stat-label">90% spending level</div><div class="dashboard-stat-value" id="dashboardSpend90">Updating…</div><div class="dashboard-stat-note">Annual after-tax spending in today’s dollars</div></div>
 </section>
 <section class="dashboard-layout">
-<div class="dashboard-card"><div class="dashboard-card-head"><div><div class="dashboard-card-kicker">Projected wealth</div><h2>Your wealth through retirement</h2><p class="dashboard-card-sub">Base-case total net worth and liquid portfolio, shown in today’s purchasing power.</p></div><span class="today-pill">Today’s dollars</span></div><div class="dashboard-chart-wrap"><canvas id="chart5_dashboard"></canvas></div></div>
+<div class="dashboard-card"><div class="dashboard-card-head"><div><div class="dashboard-card-kicker">Projected wealth</div><h2>Your wealth through retirement</h2><p class="dashboard-card-sub">Gross net worth, estimated after-tax net worth, and the liquid portfolio in today’s purchasing power.</p></div><span class="today-pill">Today’s dollars</span></div><div class="dashboard-chart-wrap"><canvas id="chart5_dashboard"></canvas></div></div>
 <div class="dashboard-card"><div class="dashboard-card-head"><div><div class="dashboard-card-kicker">Retirement cash flow</div><h2>Income and lifestyle</h2><p class="dashboard-card-sub">A simple view of planned spending and Social Security at the entered claim ages.</p></div></div><div class="dashboard-cashflow"><div class="dashboard-cashflow-row"><div class="dashboard-cashflow-label">Planned lifestyle</div><div class="dashboard-cashflow-value" id="dashboardCashflowSpending">—</div><div class="dashboard-cashflow-note">After tax per year</div></div><div class="dashboard-cashflow-row"><div class="dashboard-cashflow-label">Modeled Social Security</div><div class="dashboard-cashflow-value" id="dashboardCashflowSs">—</div><div class="dashboard-cashflow-note" id="dashboardCashflowSsNote">At the selected claim ages</div></div><div class="dashboard-cashflow-row"><div class="dashboard-cashflow-label">Lifestyle above Social Security</div><div class="dashboard-cashflow-value" id="dashboardCashflowPortfolio">—</div><div class="dashboard-cashflow-note">Before taxes, timing differences, and other modeled cash flows</div></div></div></div>
 </section>
 <section class="dashboard-pair-grid">
@@ -2874,7 +2892,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 </div>
 <div class="chart-card">
 <div class="card-header">
-<h2>Baseline Total Wealth Trajectory</h2>
+<h2>Gross and Estimated After-Tax Wealth</h2>
 <div aria-label="Baseline wealth chart scale" class="scale-toggle">
 <button aria-pressed="true" class="active" id="wealthScaleLinear" onclick="setChartScale(2, 'linear')" type="button">Linear</button>
 <button aria-pressed="false" id="wealthScaleLog" onclick="setChartScale(2, 'log')" type="button">Log</button>
@@ -2946,14 +2964,14 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 <div class="model-compare-row"><span>MC success</span><strong id="iidCompareSuccess">Updating…</strong></div>
 <div class="model-compare-row"><span>90% sustainable spending</span><strong id="iidCompareSpend90">Updating…</strong></div>
 <div class="model-compare-row"><span>Median ending net worth</span><strong id="iidCompareMedianNW">Updating…</strong></div>
-<div class="model-compare-row"><span>90% downside ending NW</span><strong id="iidCompareDownsideNW">Updating…</strong></div>
+<div class="model-compare-row"><span>Worst-10% ending net worth</span><strong id="iidCompareDownsideNW">Updating…</strong></div>
 </div>
 <div class="market-model-column" id="mrModelColumn">
 <div class="market-model-column-head"><span>Mean Reverting</span><span class="model-active-pill" id="mrActivePill">Active</span></div>
 <div class="model-compare-row"><span>MC success</span><strong id="mrCompareSuccess">Updating…</strong></div>
 <div class="model-compare-row"><span>90% sustainable spending</span><strong id="mrCompareSpend90">Updating…</strong></div>
 <div class="model-compare-row"><span>Median ending net worth</span><strong id="mrCompareMedianNW">Updating…</strong></div>
-<div class="model-compare-row"><span>90% downside ending NW</span><strong id="mrCompareDownsideNW">Updating…</strong></div>
+<div class="model-compare-row"><span>Worst-10% ending net worth</span><strong id="mrCompareDownsideNW">Updating…</strong></div>
 </div>
 </div>
 <div class="market-model-takeaway" id="marketModelTakeaway">Building the side-by-side comparison…</div>
@@ -2961,25 +2979,25 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 <span>Model Diagnostics</span><span id="modelDiagnosticsChevron">▾</span>
 </button>
 <div class="model-diagnostics" id="modelDiagnostics">
-<div class="diagnostic-intro"><strong>Behind-the-scenes market sheet.</strong> The “90% downside” equity return is the 10th-percentile long-run CAGR: only 10% of simulated equity paths have a lower annualized compound return. Equity diagnostics use the pure simulated equity market, independent of your portfolio allocation.</div>
+<div class="diagnostic-intro"><strong>Behind-the-scenes market sheet.</strong> The worst-10% threshold is the standard statistical 10th-percentile long-run CAGR: only 10% of simulated equity paths have a lower annualized compound return. Equity diagnostics use the pure simulated equity market, independent of your portfolio allocation.</div>
 <div class="diagnostic-highlight-grid">
 <div class="diagnostic-highlight model-iid">
-<div class="diagnostic-highlight-label">Independent · 90% downside long-run equity CAGR</div>
+<div class="diagnostic-highlight-label">Independent · worst-10% long-run equity CAGR</div>
 <div class="diagnostic-highlight-main" id="iidDiagDownsideEnding">—</div>
 <div class="diagnostic-highlight-sub" id="iidDiagDownsideSub">Maximum drawdown in that downside equity path</div>
 </div>
 <div class="diagnostic-highlight model-mr">
-<div class="diagnostic-highlight-label">Mean reverting · 90% downside long-run equity CAGR</div>
+<div class="diagnostic-highlight-label">Mean reverting · worst-10% long-run equity CAGR</div>
 <div class="diagnostic-highlight-main" id="mrDiagDownsideEnding">—</div>
 <div class="diagnostic-highlight-sub" id="mrDiagDownsideSub">Maximum drawdown in that downside equity path</div>
 </div>
 </div>
 <div class="diagnostic-method-note" id="diagnosticCagrHorizonNote">Long-run CAGR is measured from your current age through the plan End Age using the same simulated horizon in both models.</div>
-<div class="diagnostic-table-title">Long-Run Equity Market Outcomes</div><div class="diagnostic-table-subtitle">Higher downside percentile = worse market outcome. 90th downside means only 10% of simulated equity markets performed worse.</div>
+<div class="diagnostic-table-title">Long-Run Equity Market Outcomes</div><div class="diagnostic-table-subtitle">Standard statistical percentiles are used: the 10th percentile is the worst-10% threshold.</div>
 <div class="diagnostic-table-wrap">
 <table class="diagnostic-table">
 <thead><tr class="diagnostic-group-head">
-<th class="percentile-col" rowspan="2">Downside case</th>
+<th class="percentile-col" rowspan="2">Market percentile</th>
 <th class="model-group model-group-iid" colspan="2"><span class="model-dot iid-dot"></span>Independent Returns</th>
 <th class="model-group model-group-mr" colspan="2"><span class="model-dot mr-dot"></span>Mean Reverting</th>
 </tr><tr class="diagnostic-subhead">
@@ -2995,7 +3013,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 <div class="diagnostic-table-wrap">
 <table class="diagnostic-table">
 <thead><tr class="diagnostic-group-head">
-<th class="percentile-col" rowspan="2">Retirement downside</th>
+<th class="percentile-col" rowspan="2">Outcome percentile</th>
 <th class="model-group model-group-iid" colspan="4"><span class="model-dot iid-dot"></span>Independent Returns</th>
 <th class="model-group model-group-mr" colspan="4"><span class="model-dot mr-dot"></span>Mean Reverting</th>
 </tr><tr class="diagnostic-subhead">
@@ -3010,7 +3028,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 </tr></thead>
 <tbody id="retirementSequenceDiagnosticsBody"><tr><td colspan="9">Calculating retirement-outcome percentile diagnostics…</td></tr></tbody>
 </table>
-</div><div class="diagnostic-method-note retirement-percentile-note">Percentile convention follows this calculator: higher = worse retirement outcome. Thus 90th percentile is the 90% downside case (the statistical 10th-percentile / worst-10% threshold); 75th corresponds to the statistical 25th percentile, 50th is the median, and 25th corresponds to the statistical 75th percentile.</div>
+</div><div class="diagnostic-method-note retirement-percentile-note">Percentiles now follow the standard statistical convention. The 10th percentile is the worst-10% threshold, the 25th percentile is a lower-quartile outcome, and the 50th percentile is the median.</div>
 <div class="diagnostic-method-note">Mean reversion changes the expected equity return for the next year according to how far the simulated equity market has moved above or below its long-run trend. The adjustment is capped at ±3 percentage points and fades over time. Fixed-income returns are not mean reverted.</div>
 </div>
 </div></div>
@@ -3059,7 +3077,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
     }
 
     function resampleMarkets() {
-        if (!requireStateResidence()) return;
+        if (!requireCorePlanInputs()) return;
         mcSeed = (Math.floor(Math.random() * 4294967296) >>> 0);
         saveMcSeed();
         analysisNeedsRefresh = true;
@@ -3077,13 +3095,17 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 
     function updateKpiDollarDisplay() {
         if (!lastKpiDollarArgs) return;
-        const { kpiRetNW, kpiEndNW, currentAge, retirementAge, endAge, inflation } = lastKpiDollarArgs;
+        const { kpiRetNW, kpiEndNW, kpiEndAfterTaxNW, kpiEndTaxReserve, currentAge, retirementAge, endAge, inflation } = lastKpiDollarArgs;
         const retDisplay = toTodayDollars(kpiRetNW, retirementAge, currentAge, inflation);
         const endDisplay = toTodayDollars(kpiEndNW, endAge, currentAge, inflation);
         document.getElementById('kpiNwRet').textContent = formatCompact(retDisplay);
         document.getElementById('kpiNwRetSub').textContent = `Age ${retirementAge} · Today's $`;
         document.getElementById('kpiEndNW').textContent = formatCompact(endDisplay);
         document.getElementById('kpiEndNWSub').textContent = `Age ${endAge} · Today's $`;
+        const afterTaxDisplay = toTodayDollars(kpiEndAfterTaxNW, endAge, currentAge, inflation);
+        const reserveDisplay = toTodayDollars(kpiEndTaxReserve, endAge, currentAge, inflation);
+        document.getElementById('kpiEndAfterTaxNW').textContent = formatCompact(afterTaxDisplay);
+        document.getElementById('kpiEndAfterTaxNWSub').textContent = `Age ${endAge} · after ${formatCompact(reserveDisplay)} estimated tax reserve`;
     }
 
     function updateScaleToggleUI() {
@@ -3254,20 +3276,21 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
     }
 
     const DEFAULT_PARAMS = {
-        currentAge: 40, retirementAge: 62, endAge: 90, inflation: 2.5, targetLegacy: 1000000,
-        initPreTax: 1000000, initTaxable: 1000000, initRoth: 10000,
-        salary: 500000, currentLivingExp: 200000, livingExp: 200000, emp401k: 50000, employerMatch: 8.0, rothContrib: 12000,
-        ssClaimAge: 62, ssFraMax: 50000, includeSpouseSS: false, spouseSsClaimAge: 62, spouseSsFraMax: 50000,
+        currentAge: 40, retirementAge: 65, endAge: 90, inflation: 2.5, targetLegacy: 0,
+        initPreTax: 150000, initTaxable: 25000, taxableCostBasis: 25000, initRoth: 25000,
+        salary: 100000, currentLivingExp: 55000, livingExp: 50000,
+        emp401k: 12000, roth401kContrib: 0, employerMatch: 4.0, rothContrib: 4000,
+        ssClaimAge: 62, ssFraMax: 30000, includeSpouseSS: false, spouseSsClaimAge: 62, spouseSsFraMax: 30000,
         marketVol: 15.0, pretaxGrowth: 7.0, taxableGrowth: 5.0, rothGrowth: 7.0, useMeanReversion: false,
         taxMode: 'federal', filingStatus: 'mfj', spouseCurrentAge: 40,
-        currentState: 'NONE', retirementState: 'SAME', stateMoveAge: 62,
+        currentState: 'NONE', retirementState: 'SAME', stateMoveAge: 65,
         workingTax: 40.0, retTax: 30.0,
         includeHome: false, homeAge: 51, homePrice: 2500000, downPayment: 1000000, mortgageRate: 6.0, mortgageTerm: 30,
         useSpendingPhases: false, phaseMiddleAge: 75, phaseMiddlePct: 90, phaseLateAge: 85, phaseLatePct: 80,
         includeFutureExpenses: false, futureExpense1Age: 65, futureExpense1Amount: 0, futureExpense2Age: 75, futureExpense2Amount: 0,
         useGuardrails: false, essentialSpendPct: 70, badReturnTriggerPct: -10, discretionaryCutPct: 25,
         useRmd: true, rmdStartAge: 75, withdrawalOrder: 'adaptive-rmd',
-        useAllocationModel: true, equityAllocation: 100, fixedIncomeReturn: 5.0, fixedIncomeVol: 6.0,
+        useAllocationModel: true, equityAllocation: 80, fixedIncomeReturn: 5.0, fixedIncomeVol: 6.0,
         equityBondCorrelation: 0.20, allocationStep: 5
     };
 
@@ -3338,11 +3361,11 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             if (current === 'NONE') {
                 status.innerHTML = '<strong>State of residence is required.</strong> Choose your current state before viewing results so state income tax can be included. City/local tax, taxable-account gains, itemized deductions, most credits, AMT, IRMAA and ACA effects are excluded.';
             } else {
-                const moveAge = Number(document.getElementById('stateMoveAge')?.value || document.getElementById('retirementAge')?.value || 62);
+                const moveAge = Number(document.getElementById('stateMoveAge')?.value || document.getElementById('retirementAge')?.value || 65);
                 const locationText = differentState
                     ? `${getStateName(current)} through age ${Math.max(0,moveAge - 1)}, then ${getStateName(retirement)}`
                     : getStateName(current);
-                status.innerHTML = `<strong>Detailed federal + state calculation is active.</strong> ${locationText}. Major retirement-income exclusions are included; city/local tax and taxable-account gains are excluded.`;
+                status.innerHTML = `<strong>Detailed federal + state calculation is active.</strong> ${locationText}. Major retirement-income exclusions are included. The after-tax net-worth view estimates federal long-term capital-gains tax and selected-state tax on taxable-account gains; city/local tax, NIIT, and home-sale tax are excluded.`;
             }
         }
         if (refreshReview) updatePlannerReview();
@@ -3622,7 +3645,6 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         const currentSpending = Number(document.getElementById('currentLivingExp')?.value);
         const retirementSpending = Number(document.getElementById('livingExp')?.value);
         const claimAge = Number(document.getElementById('ssClaimAge')?.value);
-        const employee401k = Number(document.getElementById('emp401k')?.value);
         const taxMode = document.getElementById('taxMode')?.value || 'federal';
         const currentState = document.getElementById('currentState')?.value || 'NONE';
         const equity = Number(document.getElementById('equityAllocation')?.value);
@@ -3634,7 +3656,6 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         if (salary > 0 && currentSpending / salary >= 0.7) notes.push('Current annual spending is high relative to gross salary. Confirm this reflects your after-tax spending while working.');
         if (currentSpending > 0 && retirementSpending / currentSpending >= 1.25) notes.push('Planned retirement spending is at least 25% above current spending. Confirm that this increase is intentional.');
         if (claimAge === 62) notes.push('Social Security is set to age 62, the earliest claim age. Compare a later claim before deciding.');
-        if (taxMode === 'federal' && employee401k > get2026EmployeeDeferralLimit(currentAge)) notes.push(`The entered employee 401(k) contribution exceeds the general 2026 elective-deferral limit for age ${currentAge}. The calculator currently uses the entered amount; confirm whether it includes a contribution type that should be modeled separately.`);
         if (taxMode === 'federal' && currentState === 'NONE') notes.push('Choose your current state to include state income tax; the current projection is federal-only.');
         if (allocationOn && equity >= 90) notes.push('The portfolio is heavily equity-weighted. Monte Carlo results will be especially sensitive to early market returns.');
 
@@ -3669,6 +3690,34 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         stateCard?.scrollIntoView({ behavior:'smooth', block:'start' });
         setTimeout(() => stateSelect.focus(), 150);
         showToast('Choose your state of residence to include state income tax');
+        return false;
+    }
+
+    function requireCorePlanInputs() {
+        if (!requireStateResidence()) return false;
+        const retirementSpending = Number(document.getElementById('livingExp')?.value || 0);
+        if (retirementSpending > 0) return true;
+
+        analysisNeedsRefresh = true;
+        lastSimulationSummary = null;
+        const setIncompleteText = (id, value) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = value;
+        };
+        setIncompleteText('dashboardSuccess', '—');
+        setIncompleteText('dashboardStatus', 'Input needed');
+        setIncompleteText('dashboardSpend90', '—');
+        setIncompleteText('dashboardSustainableSpend', '—');
+        setIncompleteText('dashboardSpendingText', 'Enter annual retirement spending to calculate plan success.');
+        setInputPanelCollapsed(false, false);
+        setUiMode('basic');
+        setPlannerView('guided', false);
+        goToPlannerStep(2);
+        openInputSection('inputSection4Body');
+        const spendingInput = document.getElementById('livingExp');
+        spendingInput?.closest('.input-section')?.scrollIntoView({ behavior:'smooth', block:'start' });
+        setTimeout(() => spendingInput?.focus(), 150);
+        showToast('Enter annual retirement spending before calculating results');
         return false;
     }
 
@@ -3714,7 +3763,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
     }
 
     function openResultsWorkspace() {
-        if (!requireStateResidence()) return;
+        if (!requireCorePlanInputs()) return;
         setResultsView('summary');
         const results = document.getElementById('resultsPanel');
         if (results) results.scrollTop = 0;
@@ -3784,7 +3833,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 
     function getDecisionPlanSnapshot() {
         const currentAge = Math.round(decisionInputNumber('currentAge', 40));
-        const retirementAge = Math.round(decisionInputNumber('retirementAge', 62));
+        const retirementAge = Math.round(decisionInputNumber('retirementAge', 65));
         const endAge = Math.round(decisionInputNumber('endAge', 90));
         const inflation = decisionInputNumber('inflation', 2.5) / 100;
         const targetLegacyToday = decisionInputNumber('targetLegacy', 0);
@@ -3798,6 +3847,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         const mortgage = includeHome
             ? calculateMortgagePayment(Math.max(0, homePrice - downPayment), mortgageRate, mortgageTerm)
             : { monthly:0, annual:0 };
+        const roth401kContrib = decisionInputNumber('roth401kContrib', 0);
+        const rothIraContrib = decisionInputNumber('rothContrib', 0);
         return {
             currentAge, retirementAge, endAge, inflation,
             targetLegacy:targetLegacyToday * Math.pow(1 + inflation, Math.max(0, endAge - currentAge)),
@@ -3809,8 +3860,10 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             currentLivingExp:decisionInputNumber('currentLivingExp', 0),
             livingExp:decisionInputNumber('livingExp', 0),
             emp401k:decisionInputNumber('emp401k', 0),
+            roth401kContrib,
+            rothIraContrib,
             employerMatch:decisionInputNumber('employerMatch', 0) / 100,
-            rothContrib:decisionInputNumber('rothContrib', 0),
+            rothContrib:roth401kContrib + rothIraContrib,
             ssClaimAge:Math.round(decisionInputNumber('ssClaimAge', 62)),
             ssFraMax:decisionInputNumber('ssFraMax', 0),
             includeSpouseSS:Boolean(document.getElementById('includeSpouseSS')?.checked),
@@ -4051,6 +4104,58 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         return baseLimit * (end - income) / (end - start);
     }
 
+    function get2026PlanContributionLimits(age, filingStatus, salary) {
+        const earnedIncome = Math.max(0, Number(salary) || 0);
+        const employee401kLimit = Math.min(get2026EmployeeDeferralLimit(age), earnedIncome);
+        const estimatedIraLimit = get2026RothIraContributionLimit(age, filingStatus, earnedIncome);
+        // The planner uses $100 increments for an income-phased Roth IRA estimate.
+        const rothIraLimit = Math.min(earnedIncome, Math.max(0, Math.floor(estimatedIraLimit / 100) * 100));
+        return { employee401kLimit, rothIraLimit };
+    }
+
+    function normalizeContributionInputs(preferredInputId = '') {
+        const traditional = document.getElementById('emp401k');
+        const roth401k = document.getElementById('roth401kContrib');
+        const rothIra = document.getElementById('rothContrib');
+        if (!traditional || !roth401k || !rothIra) return null;
+
+        const age = Number(document.getElementById('currentAge')?.value || DEFAULT_PARAMS.currentAge);
+        const salary = Number(document.getElementById('salary')?.value || 0);
+        const filingStatus = normalizeFilingStatus(document.getElementById('filingStatus')?.value);
+        const limits = get2026PlanContributionLimits(age, filingStatus, salary);
+        const manualHousehold401kMax = 75000;
+        traditional.max = manualHousehold401kMax;
+        roth401k.max = manualHousehold401kMax;
+        rothIra.max = limits.rothIraLimit;
+
+        let traditionalValue = Math.max(0, Math.min(manualHousehold401kMax, Number(traditional.value) || 0));
+        let roth401kValue = Math.max(0, Math.min(manualHousehold401kMax, Number(roth401k.value) || 0));
+        let rothIraValue = Math.max(0, Math.min(limits.rothIraLimit, Number(rothIra.value) || 0));
+        let adjusted = traditionalValue !== Number(traditional.value) || roth401kValue !== Number(roth401k.value) || rothIraValue !== Number(rothIra.value);
+
+        traditional.value = traditionalValue;
+        roth401k.value = roth401kValue;
+        rothIra.value = rothIraValue;
+
+        if (adjusted) {
+            [traditional, roth401k, rothIra].forEach(range => {
+                const exact = range.closest('.range-entry-wrap')?.querySelector('.precision-number');
+                if (exact) exact.value = formatPrecisionRangeValue(range);
+            });
+        }
+
+        const status = document.getElementById('contributionLimitStatus');
+        if (status) {
+            status.classList.toggle('caution', adjusted || limits.rothIraLimit === 0);
+            const iraText = limits.rothIraLimit > 0
+                ? `${formatCompact(rothIraValue)} entered of approximately ${formatCompact(limits.rothIraLimit)} available`
+                : 'no estimated direct contribution available at this income';
+            status.innerHTML = `${adjusted ? '<strong>An entered amount was capped at the field maximum.</strong> ' : '<strong>Manual household 401(k) entry.</strong> '}Traditional: ${formatCompact(traditionalValue)} of ${formatCompact(manualHousehold401kMax)} field maximum. Roth 401(k): ${formatCompact(roth401kValue)} of ${formatCompact(manualHousehold401kMax)} field maximum. These workplace amounts are not checked against individual IRS or plan limits. Direct Roth IRA: ${iraText}. Salary is used as a MAGI proxy; backdoor Roth contributions are not modeled.`;
+        }
+
+        return { ...limits, traditional401k:traditionalValue, roth401k:roth401kValue, rothIra:rothIraValue, adjusted };
+    }
+
     function futureValueOfAnnualContributions(annualContribution, years, annualReturn) {
         const payment = Math.max(0, Number(annualContribution) || 0);
         const n = Math.max(0, Math.round(Number(years) || 0));
@@ -4279,8 +4384,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
     }
 
     const PRECISION_MONEY_RANGE_IDS = new Set([
-        'targetLegacy','initPreTax','initTaxable','initRoth','salary','currentLivingExp','livingExp','emp401k',
-        'rothContrib','ssFraMax','spouseSsFraMax','homePrice','downPayment'
+        'targetLegacy','initPreTax','initTaxable','taxableCostBasis','initRoth','salary','currentLivingExp','livingExp','emp401k',
+        'roth401kContrib','rothContrib','ssFraMax','spouseSsFraMax','homePrice','downPayment'
     ]);
     const PRECISION_ANNUAL_RANGE_IDS = new Set(['ssFraMax','spouseSsFraMax']);
     const PRECISION_AGE_RANGE_IDS = new Set([
@@ -5291,7 +5396,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
     function calculateStateTax2026({
         stateCode = 'NONE', filingStatus = 'mfj', age = 0, spouseAge = 0,
         inflationFactor = 1, wages = 0, pretaxContributions = 0,
-        otherOrdinaryIncome = 0, socialSecurity = 0, federalTaxableSocialSecurity = 0
+        otherOrdinaryIncome = 0, capitalGains = 0, socialSecurity = 0, federalTaxableSocialSecurity = 0
     } = {}) {
         const code = STATE_TAX_RULES_2026[stateCode] ? stateCode : 'NONE';
         const rule = STATE_TAX_RULES_2026[code];
@@ -5301,6 +5406,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         const grossWages = Math.max(0, Number(wages) || 0);
         const deductibleContributions = Math.min(grossWages, Math.max(0, Number(pretaxContributions) || 0));
         const retirementIncome = Math.max(0, Number(otherOrdinaryIncome) || 0);
+        const taxableCapitalGains = Math.max(0, Number(capitalGains) || 0);
         const ordinaryIncome = Math.max(0, grossWages - deductibleContributions) + retirementIncome;
         const stateTaxableSocialSecurity = STATES_TAXING_SOCIAL_SECURITY_2026.has(code)
             ? Math.max(0, Math.min(Number(socialSecurity) || 0, Number(federalTaxableSocialSecurity) || 0))
@@ -5309,7 +5415,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         const retirementExclusion = Math.min(retirementIncome, retirementExclusionLimit);
         const standardDeduction = (rule.sd?.[jointIndex] || 0) * scale;
         const personalExemption = (rule.ex?.[jointIndex] || 0) * scale;
-        const taxableIncome = rule.none ? 0 : Math.max(0, ordinaryIncome + stateTaxableSocialSecurity - retirementExclusion - standardDeduction - personalExemption);
+        const taxableIncome = rule.none ? 0 : Math.max(0, ordinaryIncome + taxableCapitalGains + stateTaxableSocialSecurity - retirementExclusion - standardDeduction - personalExemption);
         const result = rule.none
             ? { tax:0, marginalRate:0 }
             : calculateProgressiveStateTax(taxableIncome, jointIndex ? rule.j : rule.s, scale);
@@ -5319,8 +5425,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             stateCode:code, stateIncomeTax, taxableIncome, marginalRate:result.marginalRate,
             standardDeduction, personalExemption, basicCredit,
             stateTaxableSocialSecurity, retirementExclusion,
-            effectiveRate:(ordinaryIncome + Number(socialSecurity || 0)) > 0
-                ? stateIncomeTax / (ordinaryIncome + Number(socialSecurity || 0)) : 0
+            effectiveRate:(ordinaryIncome + taxableCapitalGains + Number(socialSecurity || 0)) > 0
+                ? stateIncomeTax / (ordinaryIncome + taxableCapitalGains + Number(socialSecurity || 0)) : 0
         };
     }
 
@@ -5526,6 +5632,94 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             stateCode:state.stateCode,
             totalIncomeTax:federal.federalIncomeTax + state.stateIncomeTax,
             totalTax:federal.totalTax + state.stateIncomeTax
+        };
+    }
+
+    const FEDERAL_LTCG_THRESHOLDS_2026 = Object.freeze({
+        single:{ zero:49450, fifteen:545500 },
+        mfj:{ zero:98900, fifteen:613700 },
+        mfs:{ zero:49450, fifteen:306850 },
+        hoh:{ zero:66200, fifteen:579600 }
+    });
+
+    function calculateFederalLongTermCapitalGainsTax2026(gains, ordinaryTaxableIncome, filingStatus, inflationFactor = 1) {
+        const gain = Math.max(0, Number(gains) || 0);
+        if (gain <= 0) return 0;
+        const status = normalizeFilingStatus(filingStatus);
+        const thresholds = FEDERAL_LTCG_THRESHOLDS_2026[status] || FEDERAL_LTCG_THRESHOLDS_2026.single;
+        const scale = Math.max(.0001, Number(inflationFactor) || 1);
+        const ordinary = Math.max(0, Number(ordinaryTaxableIncome) || 0);
+        const zeroCeiling = thresholds.zero * scale;
+        const fifteenCeiling = thresholds.fifteen * scale;
+        const atZero = Math.min(gain, Math.max(0, zeroCeiling - ordinary));
+        const remainingAfterZero = Math.max(0, gain - atZero);
+        const atFifteen = Math.min(remainingAfterZero, Math.max(0, fifteenCeiling - ordinary - atZero));
+        const atTwenty = Math.max(0, remainingAfterZero - atFifteen);
+        return atFifteen * .15 + atTwenty * .20;
+    }
+
+    function estimateAfterTaxNetWorthAtAge({ pretaxBalance, taxableBalance, taxableBasis, rothBalance, homeEquity, modelParams, age, retTax }) {
+        const pretax = Math.max(0, Number(pretaxBalance) || 0);
+        const taxable = Math.max(0, Number(taxableBalance) || 0);
+        const basis = Math.max(0, Math.min(taxable, Number(taxableBasis) || 0));
+        const roth = Math.max(0, Number(rothBalance) || 0);
+        const home = Math.max(0, Number(homeEquity) || 0);
+        const startAge = Math.max(Number(age) || 0, Number(modelParams?.retirementAge) || Number(age) || 0);
+        const endAge = Math.max(startAge, Number(modelParams?.endAge) || startAge);
+        const years = Math.max(1, endAge - startAge + 1);
+        const annualPretax = pretax / years;
+        const unrealizedGain = Math.max(0, taxable - basis);
+        const annualGain = unrealizedGain / years;
+        let federalPretaxReserve = 0, statePretaxReserve = 0;
+        let federalGainReserve = 0, stateGainReserve = 0;
+
+        if (modelParams?.taxMode === 'simplified') {
+            federalPretaxReserve = pretax * Math.max(0, Math.min(.95, Number(retTax) || 0));
+            federalGainReserve = unrealizedGain * .15;
+        } else {
+            for (let projectionAge = startAge; projectionAge <= endAge; projectionAge++) {
+                const socialSecurity = getSocialSecurityIncomeAtAge(modelParams, projectionAge);
+                const context = buildFederalTaxContext(modelParams, projectionAge, socialSecurity);
+                const baseline = calculateRetirementFederalTax(0, context);
+                const withPretax = calculateRetirementFederalTax(annualPretax, context);
+                federalPretaxReserve += Math.max(0, withPretax.federalIncomeTax - baseline.federalIncomeTax);
+                statePretaxReserve += Math.max(0, withPretax.stateIncomeTax - baseline.stateIncomeTax);
+
+                if (annualGain > 0) {
+                    federalGainReserve += calculateFederalLongTermCapitalGainsTax2026(
+                        annualGain, withPretax.taxableIncome, context.filingStatus, context.inflationFactor
+                    );
+                    const stateWithGain = calculateStateTax2026({
+                        stateCode:context.stateCode,
+                        filingStatus:context.filingStatus,
+                        age:context.age,
+                        spouseAge:context.spouseAge,
+                        inflationFactor:context.inflationFactor,
+                        otherOrdinaryIncome:annualPretax,
+                        capitalGains:annualGain,
+                        socialSecurity:context.socialSecurity,
+                        federalTaxableSocialSecurity:withPretax.taxableSocialSecurity
+                    });
+                    stateGainReserve += Math.max(0, stateWithGain.stateIncomeTax - withPretax.stateIncomeTax);
+                }
+            }
+        }
+
+        const pretaxReserve = Math.min(pretax, federalPretaxReserve + statePretaxReserve);
+        const gainReserve = Math.min(taxable, federalGainReserve + stateGainReserve);
+        return {
+            grossNetWorth:pretax + taxable + roth + home,
+            afterTaxNetWorth:(pretax - pretaxReserve) + (taxable - gainReserve) + roth + home,
+            pretaxReserve,
+            federalPretaxReserve:Math.min(pretax, federalPretaxReserve),
+            statePretaxReserve:Math.min(pretax, statePretaxReserve),
+            taxableGainReserve:gainReserve,
+            federalGainReserve:Math.min(taxable, federalGainReserve),
+            stateGainReserve:Math.min(taxable, stateGainReserve),
+            taxableBasis:basis,
+            unrealizedGain,
+            blendedPretaxRate:pretax > 0 ? pretaxReserve / pretax : 0,
+            statePretaxRate:pretax > 0 ? Math.min(pretax, statePretaxReserve) / pretax : 0
         };
     }
 
@@ -5955,11 +6149,13 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         document.getElementById('disp_targetLegacyEcho').textContent = formatCompact(legacyVal);
         document.getElementById('disp_initPreTax').textContent = formatCompact(document.getElementById('initPreTax').value);
         document.getElementById('disp_initTaxable').textContent = formatCompact(document.getElementById('initTaxable').value);
+        document.getElementById('disp_taxableCostBasis').textContent = formatCompact(document.getElementById('taxableCostBasis').value);
         document.getElementById('disp_initRoth').textContent = formatCompact(document.getElementById('initRoth').value);
         document.getElementById('disp_salary').textContent = formatCompact(document.getElementById('salary').value);
         document.getElementById('disp_currentLivingExp').textContent = formatCompact(document.getElementById('currentLivingExp').value);
         document.getElementById('disp_livingExp').textContent = formatCompact(document.getElementById('livingExp').value);
         document.getElementById('disp_emp401k').textContent = formatCompact(document.getElementById('emp401k').value);
+        document.getElementById('disp_roth401kContrib').textContent = formatCompact(document.getElementById('roth401kContrib').value);
         document.getElementById('disp_employerMatch').textContent = parseFloat(document.getElementById('employerMatch').value).toFixed(1) + '%';
         document.getElementById('disp_rothContrib').textContent = formatCompact(document.getElementById('rothContrib').value);
         const claimAge = parseInt(document.getElementById('ssClaimAge').value) || 62, fraMax = parseFloat(document.getElementById('ssFraMax').value) || 50000;
@@ -6021,8 +6217,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         document.getElementById('disp_mortgageRate').textContent = parseFloat(document.getElementById('mortgageRate').value).toFixed(2) + '%';
     }
 
-    function renderCharts(labels, p10, p25, p50, p75, p90, netWorthData, liquidData, homeEquityData, pretaxData, taxableData, rothData, includeHome) {
-        lastChartArgs = [labels, p10, p25, p50, p75, p90, netWorthData, liquidData, homeEquityData, pretaxData, taxableData, rothData, includeHome];
+    function renderCharts(labels, p10, p25, p50, p75, p90, netWorthData, afterTaxNetWorthData, liquidData, homeEquityData, pretaxData, taxableData, rothData, includeHome) {
+        lastChartArgs = [labels, p10, p25, p50, p75, p90, netWorthData, afterTaxNetWorthData, liquidData, homeEquityData, pretaxData, taxableData, rothData, includeHome];
         updateScaleToggleUI();
 
         const currentAgeForDisplay = labels.length ? labels[0] : (parseInt(document.getElementById('currentAge').value) || 40);
@@ -6036,6 +6232,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         const p90Display = convertSeries(p90);
 
         const netWorthDisplay = convertSeries(netWorthData);
+        const afterTaxNetWorthDisplay = convertSeries(afterTaxNetWorthData);
         const liquidDisplay = convertSeries(liquidData);
         const homeEquityDisplay = convertSeries(homeEquityData);
         const pretaxDisplay = convertSeries(pretaxData);
@@ -6162,6 +6359,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 
         const datasets2 = [
             { label: 'Total Net Worth', data: logSafe(netWorthDisplay, chartScaleMode2), borderColor: '#0F2744', backgroundColor: '#0F2744', borderWidth: 3.2, pointRadius: 0, tension: 0.1 },
+            { label: 'Estimated After-Tax Net Worth', data: logSafe(afterTaxNetWorthDisplay, chartScaleMode2), borderColor: '#7C3AED', backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 0, tension: 0.1 },
             { label: 'Liquid Portfolio', data: logSafe(liquidDisplay, chartScaleMode2), borderColor: '#2563EB', borderWidth: 2, borderDash: [5, 5], pointRadius: 0, tension: 0.1 }
         ];
         if (includeHome) {
@@ -6205,6 +6403,16 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                     backgroundColor: 'transparent',
                     borderWidth: 2.2,
                     borderDash: [6,5],
+                    pointRadius: 0,
+                    tension: .12,
+                    fill: false
+                },
+                {
+                    label: 'Estimated after-tax net worth',
+                    data: afterTaxNetWorthDisplay,
+                    borderColor: '#7C3AED',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2.5,
                     pointRadius: 0,
                     tension: .12,
                     fill: false
@@ -6335,7 +6543,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
     }
 
     function runSimulation() {
-        if (!requireStateResidence()) return;
+        if (!requireCorePlanInputs()) return;
+        normalizeContributionInputs();
         const thisRunSerial = ++simulationSerial;
         clearTimeout(resultsRefreshTimer);
         resultsRefreshTimer = null;
@@ -6362,7 +6571,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         saveToLocalStorage();
 
         const currentAge = parseInt(document.getElementById('currentAge').value) || 40;
-        const retirementAge = parseInt(document.getElementById('retirementAge').value) || 62;
+        const retirementAge = parseInt(document.getElementById('retirementAge').value) || 65;
         const endAge = parseInt(document.getElementById('endAge').value) || 90;
         const inflation = (parseFloat(document.getElementById('inflation').value) || 2.5) / 100;
         const targetLegacyToday = parseFloat(document.getElementById('targetLegacy').value) || 0;
@@ -6370,6 +6579,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 
         let pretaxBal = parseFloat(document.getElementById('initPreTax').value) || 0;
         let taxableBal = parseFloat(document.getElementById('initTaxable').value) || 0;
+        let taxableBasisBal = Math.max(0, Math.min(taxableBal, parseFloat(document.getElementById('taxableCostBasis').value) || 0));
         let rothBal = parseFloat(document.getElementById('initRoth').value) || 0;
 
         const salaryBase = parseFloat(document.getElementById('salary').value) || 0;
@@ -6385,8 +6595,10 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             plannedSpendSubEl.textContent = `${formatCompact(livingExpBase/12)}/mo · after-tax${modifiers.length ? ' · ' + modifiers.join(', ') : ''}`;
         }
         const emp401kBase = parseFloat(document.getElementById('emp401k').value) || 0;
+        const roth401kContribBase = parseFloat(document.getElementById('roth401kContrib').value) || 0;
         const employerMatchPct = (parseFloat(document.getElementById('employerMatch').value) || 0) / 100;
-        const rothContribBase = parseFloat(document.getElementById('rothContrib').value) || 0;
+        const rothIraContribBase = parseFloat(document.getElementById('rothContrib').value) || 0;
+        const rothContribBase = roth401kContribBase + rothIraContribBase;
 
         const ssClaimAge = parseInt(document.getElementById('ssClaimAge').value) || 62;
         const ssFraMax = parseFloat(document.getElementById('ssFraMax').value) || 50000;
@@ -6507,7 +6719,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             }
         }
 
-        const labels = [], netWorthData = [], liquidData = [], homeEquityData = [];
+        const labels = [], netWorthData = [], afterTaxNetWorthData = [], liquidData = [], homeEquityData = [];
         const pretaxData = [], taxableData = [], rothData = [];
 
         const tableBody = document.querySelector('#scheduleTable tbody');
@@ -6522,11 +6734,11 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                     ? `${getStateName(currentState)} applies before age ${stateMoveAge}; ${getStateName(retirementStateCode)} applies beginning at age ${stateMoveAge}.`
                     : `${getStateName(currentState)} applies throughout the plan.`;
             taxCalculationNote.innerHTML = taxMode === 'federal'
-                ? `<strong>Tax calculation:</strong> detailed federal and state estimate using 2026 rules for ${filingLabel}, projected at the entered inflation rate. ${stateText} Major retirement-income exclusions are included. Salary is treated as one worker's wages; local taxes and taxable-account gains are excluded.`
+                ? `<strong>Tax calculation:</strong> detailed federal and state estimate using 2026 rules for ${filingLabel}, projected at the entered inflation rate. ${stateText} Major retirement-income exclusions are included. Salary is treated as one worker's wages. The after-tax net-worth view separately estimates federal long-term capital-gains tax and selected-state tax on embedded taxable-account gains; local tax, NIIT, and home-sale tax are excluded.`
                 : `<strong>Tax calculation:</strong> simplified ${(workingTax * 100).toFixed(1)}% working and ${(retTax * 100).toFixed(1)}% retirement effective rates.`;
         }
 
-        let kpiRetNW = 0, kpiRetLiquid = 0, kpiEndNW = 0;
+        let kpiRetNW = 0, kpiRetLiquid = 0, kpiEndNW = 0, kpiEndAfterTaxNW = 0, kpiEndTaxReserve = 0;
         let firstRmdSnapshot = null;
         let projectedRmdSnapshot = null;
         let preRmdOptimizationFirstAge = null;
@@ -6578,7 +6790,15 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                 homeDownPayment = (includeHome && age === homeAge) ? downPayment : 0;
                 taxableNetFlow = takeHome - livingExp - mortgageOutflow - rothContribution - homeDownPayment;
                 pretaxBal = pretaxBal * (1 + currentExpectedReturns.pretax) + pretaxContribution;
-                taxableBal = taxableBal * (1 + currentExpectedReturns.taxable) + taxableNetFlow;
+                const taxableBeforeFlow = Math.max(0, taxableBal * (1 + currentExpectedReturns.taxable));
+                if (taxableNetFlow >= 0) {
+                    taxableBasisBal += taxableNetFlow;
+                } else if (taxableBeforeFlow > 0) {
+                    const taxableWithdrawal = Math.min(taxableBeforeFlow, -taxableNetFlow);
+                    taxableBasisBal *= Math.max(0, 1 - taxableWithdrawal / taxableBeforeFlow);
+                }
+                taxableBal = taxableBeforeFlow + taxableNetFlow;
+                taxableBasisBal = Math.max(0, Math.min(Math.max(0, taxableBal), taxableBasisBal));
                 rothBal = rothBal * (1 + currentExpectedReturns.roth) + rothContribution;
             } else {
                 const phaseMultiplier = getSpendingPhaseMultiplier(age, modelParams);
@@ -6642,6 +6862,11 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                 pretaxBal = fundedResult.pretax;
                 taxableBal = fundedResult.taxable;
                 rothBal = fundedResult.roth;
+                if (taxableAvail > 0 && fundedResult.taxableDraw > 0) {
+                    taxableBasisBal *= Math.max(0, 1 - Math.min(taxableAvail, fundedResult.taxableDraw) / taxableAvail);
+                }
+                taxableBasisBal += Math.max(0, fundedResult.excessReinvested || 0);
+                taxableBasisBal = Math.max(0, Math.min(Math.max(0, taxableBal), taxableBasisBal));
                 taxesPaid = fundedResult.taxes;
                 if (taxMode === 'federal' && fundedResult.taxBreakdown) {
                     federalIncomeTaxPaid = fundedResult.taxBreakdown.federalIncomeTax;
@@ -6668,11 +6893,26 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             }
 
             const liquidTotal = pretaxBal + taxableBal + rothBal, totalNetWorth = liquidTotal + homeEquity;
+            const afterTaxSnapshot = estimateAfterTaxNetWorthAtAge({
+                pretaxBalance:pretaxBal,
+                taxableBalance:taxableBal,
+                taxableBasis:taxableBasisBal,
+                rothBalance:rothBal,
+                homeEquity,
+                modelParams,
+                age,
+                retTax
+            });
             netWorthData.push(totalNetWorth); liquidData.push(liquidTotal); homeEquityData.push(homeEquity);
+            afterTaxNetWorthData.push(afterTaxSnapshot.afterTaxNetWorth);
             pretaxData.push(pretaxBal); taxableData.push(taxableBal); rothData.push(rothBal);
 
             if (age === retirementAge) { kpiRetNW = totalNetWorth; kpiRetLiquid = liquidTotal; }
-            if (age === endAge) { kpiEndNW = totalNetWorth; }
+            if (age === endAge) {
+                kpiEndNW = totalNetWorth;
+                kpiEndAfterTaxNW = afterTaxSnapshot.afterTaxNetWorth;
+                kpiEndTaxReserve = afterTaxSnapshot.pretaxReserve + afterTaxSnapshot.taxableGainReserve;
+            }
 
             // Display the schedule in today's purchasing power; calculations remain nominal internally.
             const realFactor = infIdx > 0 ? infIdx : 1;
@@ -6726,6 +6966,11 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             const displayLiquid = liquidTotal / realFactor;
             const displayEquity = homeEquity / realFactor;
             const displayNetWorth = totalNetWorth / realFactor;
+            const displayAfterTaxNetWorth = afterTaxSnapshot.afterTaxNetWorth / realFactor;
+            const displayTaxReserve = (afterTaxSnapshot.pretaxReserve + afterTaxSnapshot.taxableGainReserve) / realFactor;
+            const displayFederalReserve = (afterTaxSnapshot.federalPretaxReserve + afterTaxSnapshot.federalGainReserve) / realFactor;
+            const displayStateReserve = (afterTaxSnapshot.statePretaxReserve + afterTaxSnapshot.stateGainReserve) / realFactor;
+            const displayTaxableBasis = taxableBasisBal / realFactor;
 
             const hasMandatoryRmd = displayMandatoryRmd >= .5;
             const hasRmdAwareDraw = displayPreferredPretax >= .5;
@@ -6758,7 +7003,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                   ], 'No portfolio withdrawal');
             const endingSummary = buildScheduleLines([
                 { label:'Liquid portfolio', value:displayLiquid, tone:'transfer', show:true },
-                { label:'Total net worth', value:displayNetWorth, tone:'', show:true }
+                { label:'Gross net worth', value:displayNetWorth, tone:'', show:true },
+                { label:'Estimated after-tax net worth', value:displayAfterTaxNetWorth, tone:'source', show:true }
             ]);
 
             const row = document.createElement('tr');
@@ -6821,14 +7067,19 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                 { label:'Roth investment growth', value:displayRothGrowth, tone:'source', signed:true, show:true },
                 { label:'Pre-tax ending balance', value:displayPretax, tone:'transfer', show:true },
                 { label:'Taxable ending balance', value:displayTaxable, tone:'transfer', show:true },
+                { label:'Tracked taxable cost basis', value:displayTaxableBasis, tone:'transfer', show:true },
                 { label:'Roth ending balance', value:displayRoth, tone:'transfer', show:true },
-                { label:'Home equity', value:displayEquity, tone:'', show:includeHome }
+                { label:'Home equity', value:displayEquity, tone:'', show:includeHome },
+                { label:'Federal tax reserve', value:-displayFederalReserve, tone:'use', signed:true, show:displayFederalReserve >= .5 },
+                { label:'State tax reserve', value:-displayStateReserve, tone:'use', signed:true, show:displayStateReserve >= .5 },
+                { label:'Estimated after-tax net worth', value:displayAfterTaxNetWorth, tone:'source', show:true }
             ]);
             const flowWord = displayNetPortfolioFlow >= 0 ? 'net saving' : 'net withdrawal';
             const federalTaxDetail = taxMode === 'federal'
                 ? `<div class="tax-basis-note"><strong>Federal tax detail:</strong> ${formatScheduleMoney(displayFederalTaxableIncome)} taxable income · ${formatScheduleMoney(displayFederalDeduction)} deductions${displayTaxableSocialSecurity > .5 ? ` · ${formatScheduleMoney(displayTaxableSocialSecurity)} of Social Security taxable` : ''} · ${Math.round(federalMarginalRate * 100)}% marginal bracket.</div>
-                   <div class="tax-basis-note"><strong>${activeStateCode === 'NONE' ? 'State tax detail' : getStateName(activeStateCode) + ' tax detail'}:</strong> ${formatScheduleMoney(displayStateTaxableIncome)} taxable income${displayStateRetirementExclusion > .5 ? ` · ${formatScheduleMoney(displayStateRetirementExclusion)} retirement-income exclusion` : ''}${displayStateTaxableSocialSecurity > .5 ? ` · ${formatScheduleMoney(displayStateTaxableSocialSecurity)} of Social Security included` : ''} · ${Math.round(stateMarginalRate * 1000) / 10}% marginal bracket. Local taxes and taxable-account gains are not modeled.</div>`
+                   <div class="tax-basis-note"><strong>${activeStateCode === 'NONE' ? 'State tax detail' : getStateName(activeStateCode) + ' tax detail'}:</strong> ${formatScheduleMoney(displayStateTaxableIncome)} taxable income${displayStateRetirementExclusion > .5 ? ` · ${formatScheduleMoney(displayStateRetirementExclusion)} retirement-income exclusion` : ''}${displayStateTaxableSocialSecurity > .5 ? ` · ${formatScheduleMoney(displayStateTaxableSocialSecurity)} of Social Security included` : ''} · ${Math.round(stateMarginalRate * 1000) / 10}% marginal bracket. Local taxes are not modeled.</div>`
                 : '';
+            const afterTaxDetail = `<div class="tax-basis-note"><strong>Estimated after-tax net worth:</strong> ${formatScheduleMoney(displayNetWorth)} gross − ${formatScheduleMoney(displayTaxReserve)} estimated tax reserve = ${formatScheduleMoney(displayAfterTaxNetWorth)}. The reserve spreads remaining pre-tax assets and embedded taxable gains across the remaining modeled retirement years, using the state selected for each year. Home equity is before potential selling costs and tax.</div>`;
             const detailRow = document.createElement('tr');
             detailRow.className = 'schedule-detail-row';
             detailRow.id = detailId;
@@ -6843,6 +7094,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                 </div>
                 <div class="schedule-reconciliation"><strong>Liquid-portfolio reconciliation:</strong> beginning ${formatScheduleMoney(displayBeginningLiquid)} ${displayTotalGrowth >= 0 ? '+' : '−'} investment growth ${formatScheduleMoney(displayTotalGrowth)} ${displayNetPortfolioFlow >= 0 ? '+' : '−'} ${flowWord} ${formatScheduleMoney(displayNetPortfolioFlow)} = ending ${formatScheduleMoney(displayLiquid)}.</div>
                 ${federalTaxDetail}
+                ${afterTaxDetail}
             </div></td>`;
             tableBody.appendChild(detailRow);
         }
@@ -7174,6 +7426,11 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             if (!cmp || cmp.serial !== simulationSerial) return;
             const fmtPct = x => Number.isFinite(x) ? `${(x*100).toFixed(1)}%` : '—';
             const fmtMoney = x => Number.isFinite(x) ? formatCompact(x) : '—';
+            const standardPercentileLabel = downsidePct => {
+                const statisticalPct = 100 - downsidePct;
+                if (statisticalPct === 50) return '50th · Median';
+                return `${statisticalPct}th${statisticalPct === 10 ? ' · Worst-10%' : ''}`;
+            };
 
             const activeKey = useMeanReversion ? 'mr' : 'iid';
             const horizonNote = document.getElementById('diagnosticCagrHorizonNote');
@@ -7221,7 +7478,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 
                         return `
                             <tr class="diagnostic-pct-row${severe}">
-                              <td class="percentile-cell"><strong>${pct}th${pct === 90 ? ' · Severe' : ''}</strong></td>
+                              <td class="percentile-cell"><strong>${standardPercentileLabel(pct)}</strong></td>
                               <td class="iid-cell">${fmtPct(iid.cagr)}</td>
                               <td class="iid-cell">${fmtPct(iid.maxDrawdown)}</td>
                               <td class="mr-cell model-divider">${fmtPct(mr.cagr)}</td>
@@ -7264,7 +7521,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 
                         return `
                             <tr class="diagnostic-pct-row${severe}">
-                              <td class="percentile-cell"><strong>${pct}th${pct === 90 ? ' · Severe' : ''}</strong></td>
+                              <td class="percentile-cell"><strong>${standardPercentileLabel(pct)}</strong></td>
 
                               <td class="iid-cell">${fmtPct(iid.cagr)}</td>
                               <td class="iid-cell">${fmtPct(iid.maxDrawdown)}</td>
@@ -7772,7 +8029,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         activeModelNotes.push(useMeanReversion ? 'mean-reverting equity returns' : 'independent annual equity returns');
         document.getElementById('mcExpenseAssumption').textContent =
             `Current MC spending assumption: ${formatCompact(livingExpBase)}/yr base after-tax spending in today's dollars, increased with inflation${activeModelNotes.length ? '; ' + activeModelNotes.join(', ') + ' enabled' : ''}.`;
-        lastKpiDollarArgs = { kpiRetNW, kpiEndNW, currentAge, retirementAge, endAge, inflation };
+        lastKpiDollarArgs = { kpiRetNW, kpiEndNW, kpiEndAfterTaxNW, kpiEndTaxReserve, currentAge, retirementAge, endAge, inflation };
         updateKpiDollarDisplay();
 
         if (includeHome && loanAmt > 0) {
@@ -7807,6 +8064,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             mcSuccess: currentMc.successRate,
             mcSpend90,
             endingNwToday: toTodayDollars(kpiEndNW, endAge, currentAge, inflation),
+            endingAfterTaxNwToday: toTodayDollars(kpiEndAfterTaxNW, endAge, currentAge, inflation),
             retirementNwToday: toTodayDollars(kpiRetNW, retirementAge, currentAge, inflation),
             legacyToday: targetLegacyToday,
             useAllocationModel,
@@ -7821,7 +8079,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         renderScenarioComparison();
         updatePlainEnglishReport();
 
-        renderCharts(labels, p10, p25, p50, p75, p90, netWorthData, liquidData, homeEquityData, pretaxData, taxableData, rothData, includeHome);
+        renderCharts(labels, p10, p25, p50, p75, p90, netWorthData, afterTaxNetWorthData, liquidData, homeEquityData, pretaxData, taxableData, rothData, includeHome);
 
         function updateOneMcSpend(level, value) {
             const valueEl = document.getElementById(`kpiMcSpend${level}`);
@@ -7984,6 +8242,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
     }
 
     function getFormValues() {
+        normalizeContributionInputs();
         const obj = {};
         for (let key in DEFAULT_PARAMS) {
             const el = document.getElementById(key);
@@ -8009,13 +8268,41 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         if (!Object.prototype.hasOwnProperty.call(incoming, 'spouseCurrentAge')) {
             merged.spouseCurrentAge = Number.isFinite(Number(merged.currentAge)) ? Number(merged.currentAge) : DEFAULT_PARAMS.spouseCurrentAge;
         }
+        if (!Object.prototype.hasOwnProperty.call(incoming, 'taxableCostBasis')) {
+            merged.taxableCostBasis = Math.max(0, Number(merged.initTaxable) || 0);
+        }
+        // Older saved plans used one ambiguous Roth contribution. Preserve that total by
+        // filling estimated direct Roth IRA space first, then the manual Roth 401(k) field.
+        if (!Object.prototype.hasOwnProperty.call(incoming, 'roth401kContrib') && Object.prototype.hasOwnProperty.call(incoming, 'rothContrib')) {
+            const age = Number(merged.currentAge) || DEFAULT_PARAMS.currentAge;
+            const salary = Math.max(0, Number(merged.salary) || 0);
+            const limits = get2026PlanContributionLimits(age, merged.filingStatus, salary);
+            const traditional = Math.max(0, Math.min(75000, Number(merged.emp401k) || 0));
+            const formerRoth = Math.max(0, Number(incoming.rothContrib) || 0);
+            merged.emp401k = traditional;
+            merged.rothContrib = Math.min(formerRoth, limits.rothIraLimit);
+            merged.roth401kContrib = Math.min(
+                Math.max(0, formerRoth - merged.rothContrib),
+                75000
+            );
+        }
+        const contributionKeys = new Set(['emp401k','roth401kContrib','rothContrib']);
         for (let key in merged) {
+            if (contributionKeys.has(key)) continue;
             const el = document.getElementById(key);
             if (el) {
                 if (el.type === 'checkbox') el.checked = Boolean(merged[key]);
                 else el.value = merged[key];
             }
         }
+        // Establish limits from the restored age, income, and filing status before
+        // assigning contributions; a prior income-ineligible plan may have max=0.
+        normalizeContributionInputs();
+        contributionKeys.forEach(key => {
+            const el = document.getElementById(key);
+            if (el) el.value = merged[key];
+        });
+        normalizeContributionInputs();
         toggleSpouseSSSection(false);
         toggleTaxModeUi();
         refreshAdvancedFeatureUi();
@@ -8070,7 +8357,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
     }
 
     let simulationDebounceTimer = null;
-    function scheduleSimulation() {
+    function scheduleSimulation(event) {
         clearTimeout(simulationDebounceTimer);
         clearTimeout(resultsRefreshTimer);
         resultsRefreshTimer = null;
@@ -8080,6 +8367,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
 
         // Keep the visible controls and saved plan current without starting Monte Carlo work.
         // Exact-entry boxes therefore focus and type normally, and slider labels still move live.
+        normalizeContributionInputs(event?.target?.id || '');
         syncAutomaticRmdSettings();
         updateLiveBadges();
         updatePlannerReview();
@@ -8213,6 +8501,10 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         ['quickPreTax', 'initPreTax'], ['quickTaxable', 'initTaxable'], ['quickRoth', 'initRoth']
     ];
 
+    function formatQuickSavingsValue(millions) {
+        return `$${formatCompact((Number(millions) || 0) * 1000000)}`;
+    }
+
     function initializeQuickStart() {
         QUICK_START_FIELDS.forEach(([quickId, sourceId]) => {
             const quick = document.getElementById(quickId);
@@ -8239,7 +8531,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             if (custom) custom.value = sourceMillions.toFixed(2);
             quick.value = sourceMillions;
             const display = document.getElementById(`${quickId}Display`);
-            if (display) display.textContent = `$${sourceMillions.toFixed(2)}M`;
+            if (display) display.textContent = formatQuickSavingsValue(sourceMillions);
         });
         renderQuickStart();
     }
@@ -8253,7 +8545,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         if (!Number.isFinite(value)) return;
         if (fromCustom) slider.value = value;
         else custom.value = value.toFixed(2);
-        display.textContent = `$${value.toFixed(2)}M`;
+        display.textContent = formatQuickSavingsValue(value);
     }
 
     function toggleQuickSavingsCustom(id) {
@@ -8295,8 +8587,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             const salary = getQuickStartNumber('quickSalary');
             const currentSpending = getQuickStartNumber('quickCurrentSpending');
             const spending = getQuickStartNumber('quickSpending');
-            if (!Number.isFinite(salary) || salary < 0 || !Number.isFinite(currentSpending) || currentSpending < 0 || !Number.isFinite(spending) || spending < 0) {
-                error.textContent = 'Enter zero or a positive amount in $ thousands for income, current spending, and retirement spending.';
+            if (!Number.isFinite(salary) || salary < 0 || !Number.isFinite(currentSpending) || currentSpending < 0 || !Number.isFinite(spending) || spending <= 0) {
+                error.textContent = 'Enter zero or a positive amount for income and current spending, and an amount above zero for retirement spending.';
                 return;
             }
             if (!document.getElementById('quickCurrentState')?.value) {
