@@ -420,8 +420,25 @@
             padding:6px 7px; font-size:.75rem; background:white; color:var(--slate-900);
         }
         .feature-inline-note { font-size:.64rem; color:var(--slate-600); margin-top:7px; line-height:1.35; }
+        .education-child-card {
+            border:1px solid #BFDBFE; border-radius:9px; padding:11px; margin-top:10px;
+            background:linear-gradient(180deg,#F8FBFF 0%,#FFFFFF 100%);
+        }
+        .education-child-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:9px; }
+        .education-child-head strong { color:var(--primary); font-size:.78rem; }
+        #educationSectionBody.open { max-height:2400px; }
+        .education-remove-btn, .education-add-btn {
+            border:1px solid #93C5FD; background:white; color:#1D4ED8; border-radius:7px;
+            padding:6px 9px; font-size:.68rem; font-weight:850; cursor:pointer;
+        }
+        .education-add-btn { margin-top:10px; padding:8px 11px; }
+        .education-summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:11px; }
+        .education-summary-box { background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:9px; }
+        .education-summary-box span { display:block; color:var(--slate-600); font-size:.62rem; font-weight:800; text-transform:uppercase; }
+        .education-summary-box strong { display:block; color:var(--primary); font-size:.9rem; margin-top:3px; }
         @media (max-width:520px) {
             .mini-grid, .mini-grid.three { grid-template-columns:1fr; }
+            .education-summary-grid { grid-template-columns:1fr; }
         }
 
         /* Phase 5: scenario comparison */
@@ -2427,6 +2444,65 @@
 </div>
 </div>
 </div>
+<div class="card input-section section-goals" data-planner-step="4" data-section-kicker="8 · Children &amp; education">
+<div class="card-header">
+<div class="toggle-wrapper">
+<div><h2>Children &amp; Education</h2><div class="feature-desc">Model education costs, dedicated 529 savings, and the remaining amount the household must fund.</div></div>
+<label class="switch"><input id="includeEducation" onchange="toggleEducationSection()" type="checkbox"/><span class="slider-round"></span></label>
+</div>
+</div>
+<div class="collapsible-body" id="educationSectionBody">
+<div class="advanced-model-note"><strong>All costs are entered in today’s dollars.</strong> The parent-funded share is projected with education inflation. Existing 529 savings grow tax-free, and annual 529 contributions continue until that child’s education begins. Qualified education withdrawals are modeled tax-free; any remaining gap is paid from household cash or the retirement portfolio.</div>
+<div class="mini-grid">
+<div class="mini-field"><label>Education cost inflation (%)</label><input id="educationInflation" max="10" min="0" step="0.25" type="number" value="5"/></div>
+<div class="mini-field"><label>529 annual return (%)</label><input id="education529Return" max="12" min="0" step="0.25" type="number" value="6"/></div>
+</div>
+<div class="education-child-card" id="educationChild1Card">
+<div class="education-child-head"><strong>Child 1</strong></div>
+<div class="mini-grid three">
+<div class="mini-field"><label>Current age</label><input id="child1Age" max="30" min="0" step="1" type="number" value="10"/></div>
+<div class="mini-field"><label>Education begins at age</label><input id="child1StartAge" max="35" min="1" step="1" type="number" value="18"/></div>
+<div class="mini-field"><label>Years of education</label><input id="child1Years" max="10" min="1" step="1" type="number" value="4"/></div>
+<div class="mini-field"><label>Annual cost (today’s $)</label><input id="child1AnnualCost" max="250000" min="0" step="1000" type="number" value="40000"/></div>
+<div class="mini-field"><label>Parents plan to cover (%)</label><input id="child1ParentPct" max="100" min="0" step="5" type="number" value="75"/></div>
+<div class="mini-field"><label>Existing 529 savings</label><input id="child1Existing529" max="1000000" min="0" step="1000" type="number" value="0"/></div>
+<div class="mini-field"><label>Annual 529 contribution</label><input id="child1Annual529" max="100000" min="0" step="500" type="number" value="0"/></div>
+</div>
+</div>
+<div class="education-child-card" id="educationChild2Card" hidden>
+<div class="education-child-head"><strong>Child 2</strong><button class="education-remove-btn" type="button" onclick="setEducationChildEnabled(2,false)">Remove</button></div>
+<div class="mini-grid three">
+<div class="mini-field"><label>Current age</label><input id="child2Age" max="30" min="0" step="1" type="number" value="7"/></div>
+<div class="mini-field"><label>Education begins at age</label><input id="child2StartAge" max="35" min="1" step="1" type="number" value="18"/></div>
+<div class="mini-field"><label>Years of education</label><input id="child2Years" max="10" min="1" step="1" type="number" value="4"/></div>
+<div class="mini-field"><label>Annual cost (today’s $)</label><input id="child2AnnualCost" max="250000" min="0" step="1000" type="number" value="40000"/></div>
+<div class="mini-field"><label>Parents plan to cover (%)</label><input id="child2ParentPct" max="100" min="0" step="5" type="number" value="75"/></div>
+<div class="mini-field"><label>Existing 529 savings</label><input id="child2Existing529" max="1000000" min="0" step="1000" type="number" value="0"/></div>
+<div class="mini-field"><label>Annual 529 contribution</label><input id="child2Annual529" max="100000" min="0" step="500" type="number" value="0"/></div>
+</div>
+</div>
+<div class="education-child-card" id="educationChild3Card" hidden>
+<div class="education-child-head"><strong>Child 3</strong><button class="education-remove-btn" type="button" onclick="setEducationChildEnabled(3,false)">Remove</button></div>
+<div class="mini-grid three">
+<div class="mini-field"><label>Current age</label><input id="child3Age" max="30" min="0" step="1" type="number" value="5"/></div>
+<div class="mini-field"><label>Education begins at age</label><input id="child3StartAge" max="35" min="1" step="1" type="number" value="18"/></div>
+<div class="mini-field"><label>Years of education</label><input id="child3Years" max="10" min="1" step="1" type="number" value="4"/></div>
+<div class="mini-field"><label>Annual cost (today’s $)</label><input id="child3AnnualCost" max="250000" min="0" step="1000" type="number" value="40000"/></div>
+<div class="mini-field"><label>Parents plan to cover (%)</label><input id="child3ParentPct" max="100" min="0" step="5" type="number" value="75"/></div>
+<div class="mini-field"><label>Existing 529 savings</label><input id="child3Existing529" max="1000000" min="0" step="1000" type="number" value="0"/></div>
+<div class="mini-field"><label>Annual 529 contribution</label><input id="child3Annual529" max="100000" min="0" step="500" type="number" value="0"/></div>
+</div>
+</div>
+<input id="child2Enabled" type="checkbox" hidden/><input id="child3Enabled" type="checkbox" hidden/>
+<button class="education-add-btn" id="addEducationChildBtn" type="button" onclick="addEducationChild()">+ Add another child</button>
+<div class="education-summary-grid">
+<div class="education-summary-box"><span>Parent-funded cost</span><strong id="educationSummaryCost">—</strong></div>
+<div class="education-summary-box"><span>Covered by 529</span><strong id="educationSummary529">—</strong></div>
+<div class="education-summary-box"><span>Remaining gap</span><strong id="educationSummaryGap">—</strong></div>
+</div>
+<div class="feature-inline-note">Scholarships, financial aid, student loans, non-qualified 529 withdrawals, and state 529 deductions are not modeled in this first version.</div>
+</div>
+</div>
 <div class="card input-section advanced-only section-strategy" data-planner-step="4" data-section-kicker="8 · Retirement strategy">
 <div class="card-header" onclick="toggleInputSection('inputSection7Body', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleInputSection('inputSection7Body', this);}" role="button" tabindex="0">
 <div class="section-header-row">
@@ -3286,6 +3362,10 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         currentState: 'NONE', retirementState: 'SAME', stateMoveAge: 65,
         workingTax: 40.0, retTax: 30.0,
         includeHome: false, homeAge: 51, homePrice: 2500000, downPayment: 1000000, mortgageRate: 6.0, mortgageTerm: 30,
+        includeEducation: false, educationInflation: 5.0, education529Return: 6.0,
+        child1Age: 10, child1StartAge: 18, child1Years: 4, child1AnnualCost: 40000, child1ParentPct: 75, child1Existing529: 0, child1Annual529: 0,
+        child2Enabled: false, child2Age: 7, child2StartAge: 18, child2Years: 4, child2AnnualCost: 40000, child2ParentPct: 75, child2Existing529: 0, child2Annual529: 0,
+        child3Enabled: false, child3Age: 5, child3StartAge: 18, child3Years: 4, child3AnnualCost: 40000, child3ParentPct: 75, child3Existing529: 0, child3Annual529: 0,
         useSpendingPhases: false, phaseMiddleAge: 75, phaseMiddlePct: 90, phaseLateAge: 85, phaseLatePct: 80,
         includeFutureExpenses: false, futureExpense1Age: 65, futureExpense1Amount: 0, futureExpense2Age: 75, futureExpense2Amount: 0,
         useGuardrails: false, essentialSpendPct: 70, badReturnTriggerPct: -10, discretionaryCutPct: 25,
@@ -3897,6 +3977,15 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             useRmd:Boolean(document.getElementById('useRmd')?.checked),
             rmdStartAge:Math.round(decisionInputNumber('rmdStartAge', 75)),
             withdrawalOrder:document.getElementById('withdrawalOrder')?.value || 'pretax-taxable-roth',
+            includeEducation:Boolean(document.getElementById('includeEducation')?.checked),
+            educationInflation:decisionInputNumber('educationInflation', 5),
+            education529Return:decisionInputNumber('education529Return', 6),
+            child1Age:decisionInputNumber('child1Age', 10), child1StartAge:decisionInputNumber('child1StartAge', 18), child1Years:decisionInputNumber('child1Years', 4),
+            child1AnnualCost:decisionInputNumber('child1AnnualCost', 0), child1ParentPct:decisionInputNumber('child1ParentPct', 75), child1Existing529:decisionInputNumber('child1Existing529', 0), child1Annual529:decisionInputNumber('child1Annual529', 0),
+            child2Enabled:Boolean(document.getElementById('child2Enabled')?.checked), child2Age:decisionInputNumber('child2Age', 7), child2StartAge:decisionInputNumber('child2StartAge', 18), child2Years:decisionInputNumber('child2Years', 4),
+            child2AnnualCost:decisionInputNumber('child2AnnualCost', 0), child2ParentPct:decisionInputNumber('child2ParentPct', 75), child2Existing529:decisionInputNumber('child2Existing529', 0), child2Annual529:decisionInputNumber('child2Annual529', 0),
+            child3Enabled:Boolean(document.getElementById('child3Enabled')?.checked), child3Age:decisionInputNumber('child3Age', 5), child3StartAge:decisionInputNumber('child3StartAge', 18), child3Years:decisionInputNumber('child3Years', 4),
+            child3AnnualCost:decisionInputNumber('child3AnnualCost', 0), child3ParentPct:decisionInputNumber('child3ParentPct', 75), child3Existing529:decisionInputNumber('child3Existing529', 0), child3Annual529:decisionInputNumber('child3Annual529', 0),
             useAllocationModel:allocation.useAllocationModel,
             equityAllocation:allocation.equityAllocation,
             fixedIncomeReturn:allocation.fixedIncomeReturn,
@@ -3950,6 +4039,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             ? getExpectedReturnsForAllocation(p.equityAllocation, p.pretaxGrowth, p.taxableGrowth, p.rothGrowth, p.fixedIncomeReturn)
             : { pretax:p.pretaxGrowth, taxable:p.taxableGrowth, roth:p.rothGrowth };
         const projectedFirstRmdNeed = getProjectedRmdNeed(p, spending);
+        const educationPlan = buildEducationPlan(p);
 
         for (let age = p.currentAge; age <= p.endAge; age++) {
             const yearIdx = age - p.currentAge;
@@ -3958,6 +4048,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             const mortgageOutflow = p.includeHome && p.homeAge > 0 && age >= p.homeAge && age < p.homeAge + p.mortgageTerm
                 ? p.mortgage.annual : 0;
             const decisionCostToday = age === p.decisionMovingAge ? Math.max(0, Number(p.decisionMovingCostToday) || 0) : 0;
+            const education = getEducationEntry(educationPlan, age);
+            const educationCashNeedToday = education.contributionToday + education.gapToday;
             if (isWorking) {
                 const salary = p.salary * infIdx;
                 const employee401k = p.emp401k * infIdx;
@@ -3970,14 +4062,14 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                 if (taxResult) totalStateTaxToday += taxResult.stateIncomeTax / infIdx;
                 const takeHome = Math.max(0, salary - employee401k - taxes);
                 const currentSpending = Number.isFinite(p.currentLivingExp) ? p.currentLivingExp : spending;
-                const expenses = (currentSpending + getOneTimeExpenseToday(age, p) + decisionCostToday) * infIdx;
+                const expenses = (currentSpending + getOneTimeExpenseToday(age, p) + educationCashNeedToday + decisionCostToday) * infIdx;
                 const downPayment = p.includeHome && age === p.homeAge ? p.downPayment : 0;
                 pretax = pretax * (1 + expected.pretax) + employee401k + employer401k;
                 roth = roth * (1 + expected.roth) + p.rothContrib * infIdx;
                 taxable = taxable * (1 + expected.taxable) + takeHome - expenses - mortgageOutflow - p.rothContrib * infIdx - downPayment;
             } else {
                 const phaseMultiplier = getSpendingPhaseMultiplier(age, p);
-                const expenses = (spending * phaseMultiplier + getOneTimeExpenseToday(age, p) + decisionCostToday) * infIdx;
+                const expenses = (spending * phaseMultiplier + getOneTimeExpenseToday(age, p) + educationCashNeedToday + decisionCostToday) * infIdx;
                 const socialSecurity = (age >= p.ssClaimAge ? ssBase * infIdx : 0)
                     + (p.includeSpouseSS && age >= p.spouseSsClaimAge ? spouseSsBase * infIdx : 0);
                 const deficit = Math.max(0, expenses + mortgageOutflow - socialSecurity);
@@ -4395,6 +4487,16 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         inflation:1, employerMatch:1, marketVol:1, pretaxGrowth:2, taxableGrowth:2,
         rothGrowth:2, workingTax:1, retTax:1, mortgageRate:2, equityAllocation:0
     });
+    // The slider retains its fine precision. These larger steps apply only to the
+    // adjacent − / + buttons; users can still type any exact value in the box.
+    const PRECISION_STEPPER_STEPS = Object.freeze({
+        targetLegacy:250000,
+        initPreTax:100000, initTaxable:100000, taxableCostBasis:100000, initRoth:100000,
+        salary:10000, currentLivingExp:5000, livingExp:5000,
+        emp401k:1000, roth401kContrib:1000, rothContrib:1000,
+        ssFraMax:2500, spouseSsFraMax:2500,
+        homePrice:250000, downPayment:250000
+    });
 
     function formatPrecisionRangeValue(range) {
         if (!range) return '';
@@ -4495,7 +4597,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             num.addEventListener('blur', () => { num.value = formatPrecisionRangeValue(range); });
 
             const adjust = direction => {
-                const step = Number(range.step || 1) || 1;
+                const step = PRECISION_STEPPER_STEPS[range.id] || Number(range.step || 1) || 1;
                 applyExact(Number(range.value) + direction * step);
             };
             minus.addEventListener('click', e => { e.stopPropagation(); adjust(-1); });
@@ -4952,6 +5054,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         if (currentEquity !== null && currentEquity >= 80) risks.push({ text:`The ${Math.round(currentEquity)}% equity allocation increases sensitivity to sequence-of-returns risk near retirement.`, watch:true });
         if (checked('useSpendingPhases')) risks.push({ text:'Later-life spending phases are active, reducing modeled lifestyle spending at the entered ages.', watch:false });
         if (checked('includeFutureExpenses')) risks.push({ text:'One-time future expenses are active and are never reduced by spending guardrails.', watch:true });
+        if (s.education) risks.push({ text:`Children’s education is active: ${formatReportMoney(s.education.from529Today)} is projected from dedicated 529 savings and ${formatReportMoney(s.education.gapToday)} remains for household cash or portfolio funding.`, watch:s.education.gapToday > 0 });
         if (checked('useGuardrails')) risks.push({ text:'Spending guardrails are active and may reduce discretionary spending after a severe simulated return.', watch:true });
         if (s.rmd?.enabled) risks.push({ text:`Automatic simplified RMD modeling begins at about age ${s.rmd.startAge}; projected gross withdrawals, estimated taxes, and net cash are kept separate.`, watch:Boolean(s.rmd.pressure) });
         if (!checked('useSpendingPhases') && !checked('includeFutureExpenses') && !checked('useGuardrails')) risks.push({ text:'Optional spending phases, one-time expenses, and guardrails are off; spending follows the simpler baseline pattern.', watch:false });
@@ -4979,6 +5082,11 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         }
 
         const actionCandidates = [];
+        if (s.education?.gapToday > 0) actionCandidates.push({
+            title:'Review the education funding gap',
+            sub:`About ${formatReportMoney(s.education.gapToday)} of parent-funded education cost remains after modeled 529 withdrawals, across all education years.`,
+            impact:Number.POSITIVE_INFINITY - 1
+        });
         if (suggested) {
             const deltaPts = (suggested.successRate - s.mcSuccess) * 100;
             if (deltaPts > .25 && Math.abs(suggested.equityPct - s.equityAllocation) >= 2.5) actionCandidates.push({ title:`Compare a ${Math.round(suggested.equityPct)}% equity allocation`, sub:`The optimizer estimates a ${deltaPts.toFixed(1)}-point improvement using the same market sample.`, impact:deltaPts });
@@ -5220,6 +5328,36 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             ['includeFutureExpenses','futureExpenseOptions'],
             ['useGuardrails','guardrailOptions']
         ].forEach(([t,b]) => toggleAdvancedFeature(t,b));
+        toggleEducationSection(false);
+    }
+
+    function setEducationChildEnabled(childNumber, enabled, shouldRun = true) {
+        const toggle = document.getElementById(`child${childNumber}Enabled`);
+        const card = document.getElementById(`educationChild${childNumber}Card`);
+        if (toggle) toggle.checked = Boolean(enabled);
+        if (card) card.hidden = !enabled;
+        const addButton = document.getElementById('addEducationChildBtn');
+        if (addButton) {
+            const secondOn = Boolean(document.getElementById('child2Enabled')?.checked);
+            const thirdOn = Boolean(document.getElementById('child3Enabled')?.checked);
+            addButton.hidden = secondOn && thirdOn;
+        }
+        updateEducationSummary();
+        if (shouldRun) scheduleSimulation();
+    }
+
+    function addEducationChild() {
+        if (!document.getElementById('child2Enabled')?.checked) setEducationChildEnabled(2, true);
+        else if (!document.getElementById('child3Enabled')?.checked) setEducationChildEnabled(3, true);
+    }
+
+    function toggleEducationSection(shouldRun = true) {
+        const enabled = Boolean(document.getElementById('includeEducation')?.checked);
+        document.getElementById('educationSectionBody')?.classList.toggle('open', enabled);
+        setEducationChildEnabled(2, Boolean(document.getElementById('child2Enabled')?.checked), false);
+        setEducationChildEnabled(3, Boolean(document.getElementById('child3Enabled')?.checked), false);
+        updateEducationSummary();
+        if (shouldRun) scheduleSimulation();
     }
 
     function getSpendingPhaseMultiplier(age, p) {
@@ -5235,6 +5373,101 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         if (age === Math.round(p.futureExpense1Age)) total += Math.max(0, p.futureExpense1Amount || 0);
         if (age === Math.round(p.futureExpense2Age)) total += Math.max(0, p.futureExpense2Amount || 0);
         return total;
+    }
+
+    function getEducationChildren(p) {
+        const children = [];
+        for (let index = 1; index <= 3; index++) {
+            const enabled = index === 1 || Boolean(p[`child${index}Enabled`]);
+            if (!enabled) continue;
+            children.push({
+                index,
+                currentAge:Math.max(0, Number(p[`child${index}Age`]) || 0),
+                startAge:Math.max(0, Number(p[`child${index}StartAge`]) || 0),
+                years:Math.max(1, Math.round(Number(p[`child${index}Years`]) || 1)),
+                annualCost:Math.max(0, Number(p[`child${index}AnnualCost`]) || 0),
+                parentShare:Math.max(0, Math.min(1, (Number(p[`child${index}ParentPct`]) || 0) / 100)),
+                existing529:Math.max(0, Number(p[`child${index}Existing529`]) || 0),
+                annual529:Math.max(0, Number(p[`child${index}Annual529`]) || 0)
+            });
+        }
+        return children;
+    }
+
+    function buildEducationPlan(p) {
+        const startAge = Math.round(Number(p.currentAge) || 0);
+        const endAge = Math.max(startAge, Math.round(Number(p.endAge) || startAge));
+        const inflation = Math.max(-.99, Number(p.inflation) || 0);
+        const educationInflation = Math.max(-.99, (Number(p.educationInflation) || 0) / 100);
+        const return529 = Math.max(-.99, (Number(p.education529Return) || 0) / 100);
+        const entries = new Map();
+        for (let age = startAge; age <= endAge; age++) {
+            entries.set(age, { contributionToday:0, costToday:0, from529Today:0, gapToday:0, balanceToday:0 });
+        }
+        if (!p.includeEducation) return { entries, totals:{ costToday:0, from529Today:0, gapToday:0, contributionToday:0 } };
+
+        const totals = { costToday:0, from529Today:0, gapToday:0, contributionToday:0 };
+        getEducationChildren(p).forEach(child => {
+            let balance = child.existing529;
+            const yearsUntilStart = child.startAge - child.currentAge;
+            const educationStartPlanAge = startAge + Math.max(0, yearsUntilStart);
+            const elapsedEducationYears = Math.max(0, child.currentAge - child.startAge);
+            const remainingEducationYears = Math.max(0, child.years - elapsedEducationYears);
+            for (let age = startAge; age <= endAge; age++) {
+                const yearIndex = age - startAge;
+                const generalInflationFactor = Math.pow(1 + inflation, yearIndex);
+                balance *= (1 + return529);
+                let contribution = 0;
+                if (age < educationStartPlanAge) {
+                    contribution = child.annual529 * generalInflationFactor;
+                    balance += contribution;
+                }
+                const educationYear = age - educationStartPlanAge;
+                let parentCost = 0;
+                if (educationYear >= 0 && educationYear < remainingEducationYears) {
+                    parentCost = child.annualCost * child.parentShare * Math.pow(1 + educationInflation, yearIndex);
+                }
+                const from529 = Math.min(balance, parentCost);
+                balance -= from529;
+                const gap = Math.max(0, parentCost - from529);
+                const entry = entries.get(age);
+                const toToday = value => value / Math.max(.000001, generalInflationFactor);
+                entry.contributionToday += toToday(contribution);
+                entry.costToday += toToday(parentCost);
+                entry.from529Today += toToday(from529);
+                entry.gapToday += toToday(gap);
+                entry.balanceToday += toToday(balance);
+                totals.contributionToday += toToday(contribution);
+                totals.costToday += toToday(parentCost);
+                totals.from529Today += toToday(from529);
+                totals.gapToday += toToday(gap);
+            }
+        });
+        return { entries, totals };
+    }
+
+    function getEducationEntry(plan, age) {
+        return plan?.entries?.get(Math.round(age)) || { contributionToday:0, costToday:0, from529Today:0, gapToday:0, balanceToday:0 };
+    }
+
+    function updateEducationSummary(plan = null) {
+        const cost = document.getElementById('educationSummaryCost');
+        if (!cost) return;
+        let educationPlan = plan;
+        if (!educationPlan) {
+            const params = {};
+            Object.keys(DEFAULT_PARAMS).forEach(key => {
+                const el = document.getElementById(key);
+                if (!el) params[key] = DEFAULT_PARAMS[key];
+                else if (el.type === 'checkbox') params[key] = el.checked;
+                else params[key] = Number.isFinite(Number(el.value)) ? Number(el.value) : el.value;
+            });
+            params.inflation = (Number(params.inflation) || 0) / 100;
+            educationPlan = buildEducationPlan(params);
+        }
+        cost.textContent = formatCompact(educationPlan.totals.costToday);
+        document.getElementById('educationSummary529').textContent = formatCompact(educationPlan.totals.from529Today);
+        document.getElementById('educationSummaryGap').textContent = formatCompact(educationPlan.totals.gapToday);
     }
 
     function inferRmdStartAge(currentAge, currentYear = new Date().getFullYear()) {
@@ -5793,7 +6026,9 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         const yearsFromToday = Math.max(0, age - p.currentAge);
         const infIdx = Math.pow(1 + p.inflation, yearsFromToday);
         const phaseMultiplier = getSpendingPhaseMultiplier(age, p);
-        const spending = (retirementSpendingToday * phaseMultiplier + getOneTimeExpenseToday(age, p)) * infIdx;
+        const education = getEducationEntry(buildEducationPlan(p), age);
+        const educationCashNeedToday = education.contributionToday + education.gapToday;
+        const spending = (retirementSpendingToday * phaseMultiplier + getOneTimeExpenseToday(age, p) + educationCashNeedToday) * infIdx;
         const mortgageOutflow = (p.includeHome && p.homeAge > 0 && age >= p.homeAge && age < (p.homeAge + p.mortgageTerm))
             ? p.mortgage.annual
             : 0;
@@ -6056,6 +6291,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
     function solveMaxSpendingForLegacy(p) {
         const target = p.targetLegacy || 0;
         let l = 0, r = 3000000, mid = p.livingExp;
+        const educationPlan = buildEducationPlan(p);
         function evalCandidate(spending) {
             let pretax = p.initPreTax, taxable = p.initTaxable, roth = p.initRoth;
             const ssBase = p.ssFraMax * getSocialSecurityMultiplier(p.ssClaimAge);
@@ -6077,6 +6313,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             for (let age = p.currentAge; age <= p.endAge; age++) {
                 const yearIdx = age - p.currentAge, infIdx = Math.pow(1 + p.inflation, yearIdx), isWorking = age < p.retirementAge;
                 let mortgageOutflow = (p.includeHome && p.homeAge > 0 && age >= p.homeAge && age < (p.homeAge + p.mortgageTerm)) ? p.mortgage.annual : 0;
+                const education = getEducationEntry(educationPlan, age);
+                const educationCashNeedToday = education.contributionToday + education.gapToday;
                 if (isWorking) {
                     const sal = p.salary * infIdx, e401k = p.emp401k * infIdx, m401k = sal * p.employerMatch;
                     const workingTaxResult = p.taxMode === 'federal'
@@ -6086,14 +6324,14 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                     const taxes = workingTaxResult ? workingTaxResult.totalTax : taxInc * p.workingTax;
                     const takeHome = Math.max(0, sal - e401k - taxes);
                     const currentSpending = Number.isFinite(p.currentLivingExp) ? p.currentLivingExp : p.livingExp;
-                    const exp = (currentSpending + getOneTimeExpenseToday(age, p)) * infIdx;
+                    const exp = (currentSpending + getOneTimeExpenseToday(age, p) + educationCashNeedToday) * infIdx;
                     const dp = (p.includeHome && age === p.homeAge) ? p.downPayment : 0;
                     pretax = pretax * (1 + solverExpected.pretax) + (e401k + m401k);
                     roth = roth * (1 + solverExpected.roth) + (p.rothContrib * infIdx);
                     taxable = taxable * (1 + solverExpected.taxable) + (takeHome - exp - mortgageOutflow - (p.rothContrib * infIdx) - dp);
                 } else {
                     const phaseMultiplier = getSpendingPhaseMultiplier(age, p);
-                    const exp = (spending * phaseMultiplier + getOneTimeExpenseToday(age, p)) * infIdx;
+                    const exp = (spending * phaseMultiplier + getOneTimeExpenseToday(age, p) + educationCashNeedToday) * infIdx;
                     const primarySs = (age >= p.ssClaimAge) ? ssBase * infIdx : 0;
                     const spouseSs = (p.includeSpouseSS && age >= p.spouseSsClaimAge) ? spouseSsBase * infIdx : 0;
                     const ss = primarySs + spouseSs;
@@ -6651,6 +6889,17 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         const futureExpense2Age = parseInt(document.getElementById('futureExpense2Age').value) || 75;
         const futureExpense2Amount = parseFloat(document.getElementById('futureExpense2Amount').value) || 0;
 
+        const includeEducation = Boolean(document.getElementById('includeEducation')?.checked);
+        const educationInflation = parseFloat(document.getElementById('educationInflation')?.value) || 0;
+        const education529Return = parseFloat(document.getElementById('education529Return')?.value) || 0;
+        const educationParams = { includeEducation, educationInflation, education529Return };
+        for (let child = 1; child <= 3; child++) {
+            educationParams[`child${child}Enabled`] = child === 1 || Boolean(document.getElementById(`child${child}Enabled`)?.checked);
+            ['Age','StartAge','Years','AnnualCost','ParentPct','Existing529','Annual529'].forEach(suffix => {
+                educationParams[`child${child}${suffix}`] = parseFloat(document.getElementById(`child${child}${suffix}`)?.value) || 0;
+            });
+        }
+
         const useGuardrails = document.getElementById('useGuardrails').checked;
         const essentialSpendPct = parseFloat(document.getElementById('essentialSpendPct').value) || 70;
         const badReturnTriggerPct = parseFloat(document.getElementById('badReturnTriggerPct').value);
@@ -6663,6 +6912,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         const practicalParams = {
             useSpendingPhases, phaseMiddleAge, phaseMiddlePct, phaseLateAge, phaseLatePct,
             includeFutureExpenses, futureExpense1Age, futureExpense1Amount, futureExpense2Age, futureExpense2Amount,
+            ...educationParams,
             useGuardrails, essentialSpendPct, badReturnTriggerPct: Number.isFinite(badReturnTriggerPct) ? badReturnTriggerPct : -10,
             discretionaryCutPct, useRmd, rmdStartAge, withdrawalOrder
         };
@@ -6688,6 +6938,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         const projectedFirstRmdNeed = getProjectedRmdNeed(modelParams, livingExpBase);
         const projectedRmdSocialSecurity = getSocialSecurityIncomeAtAge(modelParams, rmdStartAge);
         const projectedRmdTaxContext = buildFederalTaxContext(modelParams, rmdStartAge, projectedRmdSocialSecurity);
+        const educationPlan = buildEducationPlan(modelParams);
+        updateEducationSummary(educationPlan);
 
         const solvedMaxSpending = solveMaxSpendingForLegacy({
             currentAge, retirementAge, endAge, inflation, targetLegacy: targetLegacyNominal,
@@ -6753,6 +7005,12 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             let salary = 0, emp401k = 0, match401k = 0, deductibleInterest = 0, taxesPaid = 0, takeHome = 0, livingExp = 0, mortgageOutflow = 0, ssIncome = 0, netDeficit = 0, cashDraw = 0;
             let federalIncomeTaxPaid = 0, stateIncomeTaxPaid = 0, payrollTaxPaid = 0, taxableSocialSecurity = 0, federalTaxableIncome = 0, federalDeduction = 0, federalMarginalRate = 0;
             let stateTaxableIncome = 0, stateTaxableSocialSecurity = 0, stateRetirementExclusion = 0, stateMarginalRate = 0, activeStateCode = getStateCodeAtAge(modelParams, age);
+            const education = getEducationEntry(educationPlan, age);
+            const educationContribution = education.contributionToday * infIdx;
+            const educationCost = education.costToday * infIdx;
+            const educationFrom529 = education.from529Today * infIdx;
+            const educationGap = education.gapToday * infIdx;
+            const education529Balance = education.balanceToday * infIdx;
             let baseSpending = 0, oneTimeExpense = getOneTimeExpenseToday(age, modelParams) * infIdx;
             let pretaxContribution = 0, rothContribution = 0, taxableNetFlow = 0, homeDownPayment = 0;
             let fundedResult = null, withdrawalPlanForYear = null;
@@ -6784,7 +7042,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                 }
                 takeHome = Math.max(0, (salary - emp401k) - taxesPaid);
                 baseSpending = currentLivingExpBase * infIdx;
-                livingExp = baseSpending + oneTimeExpense;
+                livingExp = baseSpending + oneTimeExpense + educationContribution + educationGap;
                 pretaxContribution = emp401k + match401k;
                 rothContribution = rothContribBase * infIdx;
                 homeDownPayment = (includeHome && age === homeAge) ? downPayment : 0;
@@ -6803,7 +7061,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             } else {
                 const phaseMultiplier = getSpendingPhaseMultiplier(age, modelParams);
                 baseSpending = livingExpBase * phaseMultiplier * infIdx;
-                livingExp = baseSpending + oneTimeExpense;
+                livingExp = baseSpending + oneTimeExpense + educationContribution + educationGap;
                 const primarySsIncome = (age >= ssClaimAge) ? ssAnnualBenefitBase * infIdx : 0;
                 const spouseSsIncome = (includeSpouseSS && age >= spouseSsClaimAge) ? spouseSsAnnualBenefitBase * infIdx : 0;
                 ssIncome = primarySsIncome + spouseSsIncome;
@@ -6936,7 +7194,13 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             const displayStateRetirementExclusion = stateRetirementExclusion / realFactor;
             const displayBaseSpending = baseSpending / realFactor;
             const displayOneTimeExpense = oneTimeExpense / realFactor;
+            const displayEducationCost = educationCost / realFactor;
+            const displayEducationFrom529 = educationFrom529 / realFactor;
+            const displayEducationGap = educationGap / realFactor;
+            const displayEducationContribution = educationContribution / realFactor;
+            const displayEducation529Balance = education529Balance / realFactor;
             const displayLiving = livingExp / realFactor;
+            const displayTotalCashUses = displayLiving + displayEducationFrom529;
             const displayMortgage = mortgageOutflow / realFactor;
             const displayDownPayment = homeDownPayment / realFactor;
             const displayEmp401k = emp401k / realFactor;
@@ -6979,14 +7243,19 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             const detailId = `scheduleFlowAge${age}`;
 
             const sourceSummary = isWorking
-                ? buildScheduleLines([{ label:'Gross salary', value:displaySalary, tone:'source', show:true }])
+                ? buildScheduleLines([
+                    { label:'Gross salary', value:displaySalary, tone:'source', show:true },
+                    { label:'Tax-free 529 withdrawal', value:displayEducationFrom529, tone:'source' }
+                  ])
                 : buildScheduleLines([
                     { label:'Social Security', value:displaySs, tone:'source', show:true },
-                    { label:'Portfolio draws', value:displayCashDraw, tone:hasMandatoryRmd ? 'rmd' : 'source', show:true }
+                    { label:'Portfolio draws', value:displayCashDraw, tone:hasMandatoryRmd ? 'rmd' : 'source', show:true },
+                    { label:'Tax-free 529 withdrawal', value:displayEducationFrom529, tone:'source' }
                   ], 'No cash source');
             const useSummary = buildScheduleLines([
                 { label:taxMode === 'federal' ? (isWorking ? 'Federal, state + payroll taxes' : 'Federal + state income tax') : 'Estimated taxes', value:displayTaxes, tone:'use', show:true },
-                { label:'After-tax spending', value:displayLiving, tone:'use', show:true },
+                { label:'Household cash uses', value:displayTotalCashUses, tone:'use', show:true },
+                { label:'Education funding gap', value:displayEducationGap, tone:'use' },
                 { label:'Mortgage', value:displayMortgage, tone:'use' }
             ]);
             const movementSummary = isWorking
@@ -7022,7 +7291,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             const sourceDetails = isWorking
                 ? buildScheduleLines([
                     { label:'Gross salary', value:displaySalary, tone:'source', show:true },
-                    { label:'Employer match paid directly to pre-tax', value:displayEmployerMatch, tone:'source' }
+                    { label:'Employer match paid directly to pre-tax', value:displayEmployerMatch, tone:'source' },
+                    { label:'Tax-free 529 withdrawal', value:displayEducationFrom529, tone:'source' }
                   ])
                 : buildScheduleLines([
                     { label:'Social Security', value:displaySs, tone:'source', show:true },
@@ -7030,7 +7300,8 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                     { label:'Optimized pre-tax withdrawal (gross)', value:displayPreferredPretax, tone:'rmd' },
                     { label:'Additional pre-tax withdrawal (gross)', value:displayAdditionalPretax, tone:'transfer' },
                     { label:'Taxable-account withdrawal', value:displayTaxableDraw, tone:'transfer' },
-                    { label:'Roth withdrawal', value:displayRothDraw, tone:'transfer' }
+                    { label:'Roth withdrawal', value:displayRothDraw, tone:'transfer' },
+                    { label:'Tax-free 529 withdrawal', value:displayEducationFrom529, tone:'source' }
                   ], 'No external income or portfolio draw');
             const taxUseDetails = taxMode === 'federal'
                 ? [
@@ -7043,6 +7314,9 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                 ...taxUseDetails,
                 { label:isWorking ? 'Current after-tax spending' : 'Retirement after-tax spending', value:displayBaseSpending, tone:'use', show:true },
                 { label:'One-time expense', value:displayOneTimeExpense, tone:'use' },
+                { label:'Parent-funded education cost', value:displayEducationCost, tone:'use' },
+                { label:'Education gap paid by household', value:displayEducationGap, tone:'use' },
+                { label:'Contribution to 529', value:displayEducationContribution, tone:'transfer' },
                 { label:'Mortgage payment', value:displayMortgage, tone:'use' },
                 { label:'Home down payment', value:displayDownPayment, tone:'use' }
             ]);
@@ -7069,6 +7343,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                 { label:'Taxable ending balance', value:displayTaxable, tone:'transfer', show:true },
                 { label:'Tracked taxable cost basis', value:displayTaxableBasis, tone:'transfer', show:true },
                 { label:'Roth ending balance', value:displayRoth, tone:'transfer', show:true },
+                { label:'Dedicated 529 balance', value:displayEducation529Balance, tone:'transfer', show:includeEducation },
                 { label:'Home equity', value:displayEquity, tone:'', show:includeHome },
                 { label:'Federal tax reserve', value:-displayFederalReserve, tone:'use', signed:true, show:displayFederalReserve >= .5 },
                 { label:'State tax reserve', value:-displayStateReserve, tone:'use', signed:true, show:displayStateReserve >= .5 },
@@ -7130,6 +7405,12 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         );
         const oneTimeExpenseTodayByYear = Array.from(
             { length:nYears }, (_, i) => getOneTimeExpenseToday(currentAge + i, modelParams)
+        );
+        const educationCashNeedTodayByYear = Array.from(
+            { length:nYears }, (_, i) => {
+                const education = getEducationEntry(educationPlan, currentAge + i);
+                return education.contributionToday + education.gapToday;
+            }
         );
         const mortgageOutflowByYear = Array.from({ length:nYears }, (_, i) => {
             const age = currentAge + i;
@@ -7226,7 +7507,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                         const detailedWorkingTax = detailedWorkingTaxByYear ? detailedWorkingTaxByYear[i] : null;
                         const taxes = detailedWorkingTax === null ? taxInc * workingTax : detailedWorkingTax;
                         const takeHome = Math.max(0, sal - e401 - taxes);
-                        const exp = (currentLivingExpBase + oneTimeExpenseTodayByYear[i]) * infIdx;
+                        const exp = (currentLivingExpBase + oneTimeExpenseTodayByYear[i] + educationCashNeedTodayByYear[i]) * infIdx;
                         const dp = (includeHome && age === homeAge) ? downPayment : 0;
 
                         pBal = Math.max(0, pBal * (1 + rPre) + (e401 + m401));
@@ -7247,7 +7528,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
                             }
                         }
 
-                        const exp = (baseSpendToday + oneTimeExpenseTodayByYear[i]) * infIdx;
+                        const exp = (baseSpendToday + oneTimeExpenseTodayByYear[i] + educationCashNeedTodayByYear[i]) * infIdx;
                         const primarySs = (age >= ssClaimAge) ? ssAnnualBenefitBase * infIdx : 0;
                         const spouseSs = (includeSpouseSS && age >= spouseSsClaimAge) ? spouseSsAnnualBenefitBase * infIdx : 0;
                         const ss = primarySs + spouseSs;
@@ -8023,6 +8304,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         if (useSpendingPhases) activeModelNotes.push('spending phases');
         if (useGuardrails) activeModelNotes.push('dynamic guardrail');
         if (includeFutureExpenses && (futureExpense1Amount > 0 || futureExpense2Amount > 0)) activeModelNotes.push('future expenses');
+        if (includeEducation) activeModelNotes.push('children’s education and 529 funding');
         if (useRmd) activeModelNotes.push('RMDs');
         activeModelNotes.push(taxMode === 'federal' ? 'detailed federal + state taxes' : 'simplified effective taxes');
         if (useAllocationModel) activeModelNotes.push(`${Math.round(equityAllocation)}/${Math.round(100-equityAllocation)} equity/fixed allocation`);
@@ -8074,6 +8356,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
             useMeanReversion,
             taxMode,
             filingStatus,
+            education:includeEducation ? { ...educationPlan.totals } : null,
             rmd:rmdSummary
         };
         renderScenarioComparison();
@@ -8309,6 +8592,11 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         toggleAllocationModelUi();
         toggleHomeSection(false);
         syncAutomaticRmdSettings();
+        // Saved plans, shared links, scenario loads, and Reset Defaults assign the
+        // underlying ranges programmatically. Refresh both visible representations
+        // immediately so the badge and exact-value box cannot show stale values.
+        updateLiveBadges();
+        syncPrecisionInputs();
     }
 
     function saveToLocalStorage() {
@@ -8370,6 +8658,7 @@ Equity expected return and volatility come from Section 5: Pre-Tax/Roth return a
         normalizeContributionInputs(event?.target?.id || '');
         syncAutomaticRmdSettings();
         updateLiveBadges();
+        updateEducationSummary();
         updatePlannerReview();
         clearTimeout(lightweightSaveTimer);
         lightweightSaveTimer = setTimeout(saveToLocalStorage, 180);
