@@ -150,6 +150,7 @@ def fetch_history(ticker, config=None, cache_dir=None, now=None):
         result = PriceData(history, now, metadata.get('longName') or metadata.get('shortName') or ticker,
                            metadata.get('currency', ''), 'Server Parquet cache', storage_warning)
     except Exception as exc:
+        LOG.error('Yahoo history request failed for %s: %s: %s', ticker, type(exc).__name__, str(exc))
         if cached:
             cached.warning = 'Yahoo could not refresh this symbol. Showing saved data; check the data-through date.'
             return cached
