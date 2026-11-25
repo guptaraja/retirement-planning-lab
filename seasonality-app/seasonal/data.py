@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 from io import BytesIO
 import logging
+from numbers import Real
 import os
 from pathlib import Path
 import re
@@ -136,7 +137,13 @@ def fetch_history(ticker, config=None, cache_dir=None, now=None):
         # Discard today's changing session bar until its regular session has ended.
         regular = (metadata.get('currentTradingPeriod') or {}).get('regular') or {}
         session_end = regular.get('end')
-        if session_end and now.timestamp() < session_end:
+        # yfinance 1.x returns timestamps here; older releases return Unix seconds.
+        if session_end is not None:
+            session_end = (pd.Timestamp(session_end, unit='s', tz='UTC')
+                           if isinstance(session_end, Real) else pd.Timestamp(session_end))
+            if session_end.tzinfo is None:
+                session_end = session_end.tz_localize('UTC')
+        if session_end is not None and pd.Timestamp(now) < session_end:
             exchange_tz = metadata.get('exchangeTimezoneName', 'America/New_York')
             local_today = pd.Timestamp(now).tz_convert(exchange_tz).date()
             history = history[[d.date() != local_today for d in history.index]]
