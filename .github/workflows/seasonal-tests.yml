@@ -1,0 +1,24 @@
+# Installed as .github/workflows/seasonal-tests.yml in the deployment repository.
+name: Seasonal checks
+on:
+  push:
+    branches: [seasonal-streamlit-20261124]
+    paths: ['seasonality-app/**', '.github/workflows/seasonal-tests.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: seasonality-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: seasonality-app/requirements.txt
+      - run: pip install -r requirements-dev.txt
+      - run: python -m pytest -q
