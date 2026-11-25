@@ -41,7 +41,7 @@ def change_range(first, last):
 
 st.markdown('''<style>
  .stApp{background:#f6f8fc;color:#192438}
- .block-container{max-width:1250px;padding-top:2rem;padding-bottom:2rem}
+ .block-container{max-width:1250px;padding-top:4.5rem;padding-bottom:2rem}
  [data-testid="stHeader"]{background:rgba(246,248,252,.92)}
  [data-testid="stVerticalBlockBorderWrapper"]>div{background:#fff;border-color:#e3e8f0!important;border-radius:12px}
  h1,h2,h3{letter-spacing:-.6px} h1{font-size:2rem!important;padding-top:0!important}
@@ -64,7 +64,7 @@ st.markdown('''<style>
  .positive{color:#008c75}.negative{color:#d9294d}.neutral{color:#647188}
  .return-table small,.return-table sup{font-size:10px;color:#647188}.foot{border-top:1px solid #e3e8f0;padding-top:13px;margin-top:23px;font-size:11px;color:#647188}
  div[data-testid="stDownloadButton"]{padding-top:0} button[kind="secondary"]{border-radius:6px}
- @media(max-width:650px){.block-container{padding:1rem}.brand-sub{display:none}h1{font-size:1.6rem!important}.return-table th,.return-table td{padding:9px 7px}}
+ @media(max-width:650px){.block-container{padding:4.5rem 1rem 1rem}.brand-sub{display:none}h1{font-size:1.6rem!important}.return-table th,.return-table td{padding:9px 7px}}
  </style>''', unsafe_allow_html=True)
 st.markdown('<div class="brand"><span class="brand-mark">▥</span><span class="brand-name">Seasonal</span><span class="brand-sub">MARKET RESEARCH</span></div>', unsafe_allow_html=True)
 st.markdown('<div class="eyebrow">A CALENDAR VIEW OF THE MARKET</div>', unsafe_allow_html=True)
