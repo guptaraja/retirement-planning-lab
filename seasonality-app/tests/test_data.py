@@ -59,13 +59,15 @@ def test_cloud_cache_survives_absent_local_files(monkeypatch, tmp_path):
     assert ticker.call_count == 0
 
 
-def test_changing_session_bar_is_excluded(monkeypatch, tmp_path):
+@pytest.mark.parametrize('timestamp_metadata', [False, True])
+def test_changing_session_bar_is_excluded(monkeypatch, tmp_path, timestamp_metadata):
     now = datetime(2025, 2, 3, 15, tzinfo=timezone.utc)
     history = sample(now).frame
     history.loc[pd.Timestamp('2025-02-03')] = [120., 120.]
     security = Mock()
     security.history.return_value = history
-    security.history_metadata = {'currentTradingPeriod': {'regular': {'end': now.timestamp()+3600}},
+    session_end = pd.Timestamp(now)+pd.Timedelta(hours=1) if timestamp_metadata else now.timestamp()+3600
+    security.history_metadata = {'currentTradingPeriod': {'regular': {'end': session_end}},
                                 'exchangeTimezoneName': 'America/New_York'}
     monkeypatch.setattr('seasonal.data.yf.Ticker', Mock(return_value=security))
     item = fetch_history('SPY', cache_dir=tmp_path, now=now)
